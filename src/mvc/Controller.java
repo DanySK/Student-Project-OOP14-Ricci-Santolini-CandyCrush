@@ -52,7 +52,7 @@ public class Controller implements ActionListener{
 		
 	}
 	public static void main(String args[]){
-		new Start();
+		new Menu();
 		//Controller c = new Controller(new View(), new Model());
 		//c.view.draw(c.view.getPanel(), c.modello.getMat());
 		//c.view.updateView(c.view.getPanel() ,c.view.getMat());

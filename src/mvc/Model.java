@@ -2,8 +2,8 @@ package mvc;
 
 public class Model implements IModel{
 
-	public static final int dim1 = 5;
-	public static final int dim2 = 5;
+	public static final int dim1 = 7;
+	public static final int dim2 = 7;
 	
 	private Oggetto mat[][] = new Oggetto[dim1][dim2];	
 	

@@ -1,15 +1,15 @@
 package mvc;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
-
 import javax.swing.*;
 
-public class View extends JFrame implements IView{
+public class View extends AbstractMenu implements IView{
 
 	private static final long serialVersionUID = 6751617017799096695L;
-	public static final int dim1 = 5;
-	public static final int dim2 = 5;
+	public static final int dim1 = 7;
+	public static final int dim2 = 7;
 	
 	private final static String sep = File.separator;
 	
@@ -19,48 +19,31 @@ public class View extends JFrame implements IView{
 	private final static ImageIcon violet = new ImageIcon("res"+sep+"viola.jpg");
 	
 	private JPanel panel;
-	private JPanel centralPanel;
+	private JPanel matrixPanel;
 	
 	private Butt matrix[][] = new Butt[dim1][dim2];
 	private Model modelW = new Model();
 	private Controller c = new Controller(this, modelW);
 	
+	private JLabel step = new JLabel("  30 mosse ");//modificare num mosse!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	private JLabel tot = new JLabel (" 2000 punti"); //modificare punteggio!!!!!!!!!!!!!
+	
 	public View(){
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
-		//this.setSize((int)size.getWidth(), (int)size.getHeight());
-		this.setSize((dim1*110+150), (dim1*110+50));
+		this.setSize(((dim1*100)+250), ((dim1*100)+150));
 		this.setResizable(false);
 		
 		panel = new JPanel(new BorderLayout());
-		panel.setSize((int)size.getWidth(), (int)size.getHeight());
-		this.getContentPane().add(panel);
 		
-		centralPanel = new JPanel(new GridLayout(dim1, dim2));
-		centralPanel.setSize((dim1*110), (dim2*110));
+		matrixPanel = new JPanel(new GridLayout(dim1, dim2));
+		matrixPanel.setSize((dim1*100), (dim2*100));
 		
-		JLabel nord = new JLabel(" ");
-		//nord.setSize(new Dimension (250,40));
-		nord.setOpaque(true);
-		nord.setBackground(Color.cyan);
-		
-		JLabel sud = new JLabel(" ");
-		sud.setOpaque(true);
-		sud.setBackground(Color.cyan);
-		
-		JLabel ovest = new JLabel("         ");
-		ovest.setOpaque(true);
-		ovest.setBackground(Color.cyan);
-		
-		JLabel est = new JLabel("                 ");
-		est.setOpaque(true);
-		est.setBackground(Color.cyan);
-		
-		panel.add(centralPanel, BorderLayout.CENTER);
-		panel.add(nord, BorderLayout.NORTH);
-		panel.add(sud, BorderLayout.SOUTH);
-		panel.add(ovest, BorderLayout.WEST);
-		panel.add(est, BorderLayout.EAST);
+		panel.add(matrixPanel, BorderLayout.CENTER);
+		panel.add(setNorthPanel(), BorderLayout.NORTH);
+		panel.add(setWestPanel(), BorderLayout.WEST);
+		panel.add(setSouthPanel(), BorderLayout.SOUTH);
+		panel.add(setEastPanel(), BorderLayout.EAST);
 		
 		for(int i = 0; i < dim1; i++){
 			for(int j = 0; j < dim2; j++){
@@ -77,19 +60,35 @@ public class View extends JFrame implements IView{
 				}
 				
 				matrix[i][j].addActionListener(c);
-				centralPanel.add(matrix[i][j]);	
+				matrixPanel.add(matrix[i][j]);	
 			}
 		}	
 		
+		this.getContentPane().add(panel);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 	public JPanel getPanel(){
-		return this.centralPanel;
+		return this.matrixPanel;
 	}
+	
+	//li uso ??
+	/*public String getTotNumber(){
+		return this.tot.getText();
+	}
+	
+	public String getStepNumber(){
+		return this.step.getText();
+	}*/
+	
+	public void setStep(int numStep){
+		this.step.setText("  "+numStep+"  ");
+	}
+	
 	public Butt[][] getMatrix(){
 		return this.matrix;
 	}
+	
 	public void updateView(JPanel p, Oggetto m[][]){
 			
 		for(int i = 0; i < dim1; i++){
@@ -106,33 +105,68 @@ public class View extends JFrame implements IView{
 			}		
 		}
 	}
-	/*public void whatIcon(){		
-		if (this.getColor() == ColorButt.LIGHT_BLU){
-			this.setIcon(blu);
-		}else if (this.getColor() == ColorButt.YELLOW){
-			this.setIcon(yellow);
-		}else if (this.getColor() == ColorButt.GREEN){
-			this.setIcon(green);
-		}else if (this.getColor() == ColorButt.VIOLET){
-			this.setIcon(violet);
-		}
-	}*/
 	
-	
-	/*public Oggetto[][] getMat(){
-		return this.modelW.getMat();
-	}*/
-	
-	
-	/*public void draw(JPanel p, Oggetto m[][]){
+	private JPanel setNorthPanel(){
+		//if mosseIniziali == ??  => EASY || MEDIUM || DIFFICULT LEVEL
+		JPanel pNorth = new JPanel(new BorderLayout());
+		JLabel level = new JLabel(" ??????? LEVEL");
+		level.setFont(new Font("Arial",Font.BOLD,14));
+		pNorth.add(level, BorderLayout.EAST);
+		this.lookPanel(pNorth, Color.cyan);
 		
-		for(int i = 0; i < 5; i++){
-			for(int j = 0; j < 5; j++){
-				matrix[i][j] = new Butt(m[i][j].getString(), i, j);
-				centralPanel.add(matrix[i][j]);	
-				matrix[i][j].addActionListener(c);
+		return pNorth;
+	}
+	
+	private JPanel setWestPanel(){
+		JPanel pWest = new JPanel(new BorderLayout());
+		
+		this.step.setFont(new Font("Arial",Font.BOLD,26));
+		this.step.setBackground(Color.white);
+
+		this.tot.setFont(new Font("Arial",Font.BOLD,26));
+		this.tot.setBackground(Color.white);
+		
+		pWest.add(step, BorderLayout.NORTH);
+		pWest.add(tot, BorderLayout.CENTER);
+		this.lookPanel(pWest, Color.cyan);
+		return pWest;
+	}
+	
+	private JPanel setSouthPanel(){
+		JPanel pSouth = new JPanel(new BorderLayout());
+		JButton close = new JButton();
+		ImageIcon closeIm = new ImageIcon("res"+sep+"close.jpg");
+		close.setIcon(closeIm);
+		
+		pSouth.add(close, BorderLayout.WEST);
+		
+		close.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				closeGame();
 			}
-		}	
+			
+		});
+		this.lookPanel(pSouth, Color.cyan);
+		return pSouth;
+	}
+	
+	private JPanel setEastPanel(){
+		JPanel pEast = new JPanel(new BorderLayout());
+		JLabel est = new JLabel("             ");
+		pEast.add(est);
 		
-	}*/
+		this.lookPanel(pEast, Color.cyan);
+		return pEast;
+	}
+	
+	private void updateStep(){
+		/**/
+	}
+	
+	private void updateTot(){
+		/**/
+	}
+	
+	
 }
