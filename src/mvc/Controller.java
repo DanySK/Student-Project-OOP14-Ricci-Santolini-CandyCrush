@@ -37,26 +37,26 @@ public class Controller implements ActionListener{
 			if(modello.checkExchange(lastX, lastY, b.getPosX(), b.getPosY())){
 				modello.doExchange(lastX, lastY, b.getPosX(), b.getPosY());
 				view.updateView(view.getPanel(), modello.getMat());
-				modello.checkTris(modello.getMat());
+				//modello.checkTris(modello.getMat());
 				
-				for(int i = 0; i< dim1 ; i++){
+				/*for(int i = 0; i< dim1 ; i++){
 					for(int j = 0; j< dim2; j++){
 						System.out.println(modello.getMat()[i][j].getColorButt());
 					}
 					System.out.println("\n");
-				}
+				}*/
 			}
 			lastX = -1;
 			lastY = -1;
 		}
 		
 	}
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 		new Menu();
 		//Controller c = new Controller(new View(), new Model());
 		//c.view.draw(c.view.getPanel(), c.modello.getMat());
 		//c.view.updateView(c.view.getPanel() ,c.view.getMat());
-	}
+	}*/
 
 	
 }

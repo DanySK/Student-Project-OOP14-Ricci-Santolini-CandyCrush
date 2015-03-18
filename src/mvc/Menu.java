@@ -32,7 +32,7 @@ public class Menu extends AbstractMenu {
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		int taglia = (int)size.getWidth()/2;
-		this.setSize(taglia, taglia);
+		this.setSize(taglia, taglia-((int)size.getHeight()/10));
 		this.setResizable(false);
 		
 		//create principal panel
@@ -101,6 +101,7 @@ public class Menu extends AbstractMenu {
 		
 		this.getContentPane().add(panel);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	

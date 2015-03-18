@@ -1,24 +1,25 @@
 package mvc;
 
+import java.util.Random;
+
 public class Oggetto {
 
 	private int x;
-	private int y;
-	private ColorButt color;
-	
+	private int y;;
+	private int num;
 	public Oggetto(){}
 	
-	public Oggetto(int x, int y/*, ColorButt n*/){
+	public Oggetto(int x, int y){
 		this.x = x;
 		this.y = y;
-		//this.color = n;
-		this.setColorButt();
+		Random rnd = new Random ();
+		this.num = rnd.nextInt (6);
 	}
-	public void setColorButt(){
+	/*public void setColorButt(){
 		this.color = ColorButt.randomCol();
-	}
-	public ColorButt getColorButt(){
-		return this.color;
+	}*/
+	public int getNum(){
+		return this.num;
 	}
 	public void setX(int x){
 		this.x = x;
@@ -39,9 +40,9 @@ public class Oggetto {
 	public int getY(){
 		return this.y;
 	}
-	
+	/*
 	public ColorButt getCol(){
 		return this.color;
-	}
+	}*/
 	
 }

@@ -2,6 +2,7 @@ package mvc;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class DifficultMenu extends AbstractMenu {
@@ -35,23 +36,20 @@ public class DifficultMenu extends AbstractMenu {
 		
 		//Panel look
 		JPanel pq = new JPanel();
-		this.lookPanel(pq, Color.green);
+		this.lookPanel(pq, Color.yellow);
 		pq.add(question);
 		
 		JPanel p1 = new JPanel();
-		this.lookPanel(p1, Color.green);
+		this.lookPanel(p1, Color.yellow);
 		p1.add(rb1);
 		
 		JPanel p2 = new JPanel();
-		this.lookPanel(p2, Color.green);
+		this.lookPanel(p2, Color.yellow);
 		p2.add(rb2);
 		
 		JPanel p3 = new JPanel();
-		this.lookPanel(p3, Color.green);
+		this.lookPanel(p3, Color.yellow);
 		p3.add(rb3);
-		
-		p1.setOpaque(true);
-		p1.setBackground(Color.GREEN);
 		
 		JPanel pp = new JPanel(new BorderLayout());
 		pp.add(p2, BorderLayout.NORTH);
@@ -62,9 +60,48 @@ public class DifficultMenu extends AbstractMenu {
 		p.add(p1, BorderLayout.NORTH);
 		p.add(pp, BorderLayout.CENTER);
 		//actions
-		this.rb1.addActionListener(new Click());
-		this.rb2.addActionListener(new Click());
-		this.rb3.addActionListener(new Click());
+		this.rb1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				View v = new View();
+				v.setStep(30);
+				v.setObiettivo(500);
+				closePage();
+			}
+		});
+		this.rb2.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				View v = new View();
+				v.setStep(30);
+				v.setObiettivo(500);
+				closePage();
+			}
+		});
+		this.rb3.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				View v = new View();
+				v.setStep(30);
+				v.setObiettivo(500);
+				closePage();
+			}
+		});
 		
 		//label's options
 		this.question.setFont(new Font("Arial",Font.BOLD,16));
@@ -76,17 +113,18 @@ public class DifficultMenu extends AbstractMenu {
 		this.getContentPane().add(p, BorderLayout.CENTER);
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
 	private void lookButton(JRadioButton b){
-		b.setBackground(Color.green);
+		b.setBackground(Color.yellow);
 		b.setBorderPainted(false);
 	}
 	
 	//ActionListener
 	//modificare con il numero di mosse!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	private class Click implements ActionListener{
+	/*private class Click implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
 			try {
@@ -98,5 +136,5 @@ public class DifficultMenu extends AbstractMenu {
 			closePage();
 		}
 		
-	}
+	}*/
 }
