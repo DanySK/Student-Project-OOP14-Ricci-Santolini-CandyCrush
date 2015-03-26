@@ -1,0 +1,9 @@
+This game il very easy!
+
+You just have to click on a CANDY and click again on next CANDY to exchange their position! 
+
+You must to form a tris of CANDY with the same color to increase your points.
+
+When your points are more than the points required YOU WIN!!
+
+Let's go!
