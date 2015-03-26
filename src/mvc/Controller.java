@@ -2,20 +2,17 @@ package mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
+import view.*;
 
 public class Controller implements ActionListener{
-
-	public static final int dim1 = 5;
-	public static final int dim2 = 5;
 	
 	private Model modello;
-	private IView view;
-		
-	public Controller(View v, Model m){
+	//private IPlayMenu playMenu;
+	private PlayGameMenu playMenu;	
+	public Controller(PlayGameMenu v, Model m){
 		this.modello = m;
-		this.view = v;
+		this.playMenu = v;
+		
 	}
 	
 	int lastX = -1;
@@ -25,38 +22,41 @@ public class Controller implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		Butt b = (Butt) e.getSource();
-		Butt app = (Butt) e.getSource();
-		
 		
 		if(lastX == -1 && lastY == -1){
+			//Butt app = (Butt) e.getSource();
 			lastX = b.getPosX();
 			lastY = b.getPosY();
-			app = b;
+			//app = b;
+			
 		}else{
 			
 			if(modello.checkExchange(lastX, lastY, b.getPosX(), b.getPosY())){
+				//view.updateView(view.getPanel(), modello.getMat());
 				modello.doExchange(lastX, lastY, b.getPosX(), b.getPosY());
-				view.updateView(view.getPanel(), modello.getMat());
-				//modello.checkTris(modello.getMat());
+				playMenu.updateView(playMenu.getPanel(), modello.getMat());
+				while(modello.checkTris()){
+					playMenu.updateView(playMenu.getPanel(), modello.getMat());
+				}
+				while(!modello.checkNextMove()){
+					modello.shuffle();
+					new Shuffle();
+					playMenu.updateView(playMenu.getPanel(), modello.getMat());
+				}
 				
-				/*for(int i = 0; i< dim1 ; i++){
-					for(int j = 0; j< dim2; j++){
-						System.out.println(modello.getMat()[i][j].getColorButt());
-					}
-					System.out.println("\n");
-				}*/
 			}
 			lastX = -1;
 			lastY = -1;
 		}
 		
+		if((modello.getMosse() == 0 && modello.getPunteggio() >= modello.getObiettivo()) || 
+				(modello.getPunteggio() >= modello.getObiettivo())){
+			new Win();
+		}
+		if(modello.getMosse() == 0 && modello.getPunteggio() < modello.getObiettivo()){
+			new GameOver();
+		}
 	}
-	/*public static void main(String args[]){
-		new Menu();
-		//Controller c = new Controller(new View(), new Model());
-		//c.view.draw(c.view.getPanel(), c.modello.getMat());
-		//c.view.updateView(c.view.getPanel() ,c.view.getMat());
-	}*/
 
 	
 }
