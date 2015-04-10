@@ -11,9 +11,9 @@ public class DifficultMenu extends AbstractMenu {
 	
 	private JLabel question = new JLabel("What's level?");
 	
-	private JRadioButton rb1 = new JRadioButton("EASY");
-	private JRadioButton rb2 = new JRadioButton("MEDIUM");
-	private JRadioButton rb3 = new JRadioButton("DIFFICULT");
+	private final JButton rb1 = new JButton("EASY");
+	private final JButton rb2 = new JButton("MEDIUM");
+	private final JButton rb3 = new JButton("DIFFICULT");
 	
 	public DifficultMenu(){
 		//title
@@ -23,42 +23,24 @@ public class DifficultMenu extends AbstractMenu {
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		int taglia = (int)size.getWidth()/3;
-		this.setSize(taglia, taglia/3);
+		this.setSize(taglia, taglia/5);
 		this.setResizable(false);
-		//principal panel
-		this.getContentPane().setLayout(new BorderLayout());
 		
+		//principal panel
+		JPanel panel = new MyPanel();
+		this.add(panel);
+		panel.setLayout(new FlowLayout());
 		
 		//Button look
-		this.lookButton(rb1);
-		this.lookButton(rb2);
-		this.lookButton(rb3);
+		this.lookButton(rb1, Color.white, true);
+		this.lookButton(rb2, Color.white, true);
+		this.lookButton(rb3, Color.white, true);
 		
-		//Panel look
-		JPanel pq = new JPanel();
-		this.lookPanel(pq, Color.yellow);
-		pq.add(question);
+		panel.add(question);
+		panel.add(rb1);
+		panel.add(rb2);
+		panel.add(rb3);
 		
-		JPanel p1 = new JPanel();
-		this.lookPanel(p1, Color.yellow);
-		p1.add(rb1);
-		
-		JPanel p2 = new JPanel();
-		this.lookPanel(p2, Color.yellow);
-		p2.add(rb2);
-		
-		JPanel p3 = new JPanel();
-		this.lookPanel(p3, Color.yellow);
-		p3.add(rb3);
-		
-		JPanel pp = new JPanel(new BorderLayout());
-		pp.add(p2, BorderLayout.NORTH);
-		pp.add(p3, BorderLayout.SOUTH);
-		
-		JPanel p = new JPanel();
-		p.setLayout(new BorderLayout());
-		p.add(p1, BorderLayout.NORTH);
-		p.add(pp, BorderLayout.CENTER);
 		//actions
 		this.rb1.addActionListener(new ActionListener() {
 			
@@ -69,8 +51,9 @@ public class DifficultMenu extends AbstractMenu {
 					e1.printStackTrace();
 				}
 				PlayGameMenu v = new PlayGameMenu();
-				v.setStep(30);
-				v.setObiettivo(1000);
+				v.setStep(Utility.num_mosse);
+				v.setObiettivo(Utility.easy_ob);
+				v.setDiff("EASY ");
 				closePage();
 			}
 		});
@@ -83,8 +66,9 @@ public class DifficultMenu extends AbstractMenu {
 					e1.printStackTrace();
 				}
 				PlayGameMenu v = new PlayGameMenu();
-				v.setStep(30);
-				v.setObiettivo(1300);
+				v.setStep(Utility.num_mosse);
+				v.setObiettivo(Utility.medium_ob);
+				v.setDiff("NORMAL ");
 				closePage();
 			}
 		});
@@ -97,44 +81,18 @@ public class DifficultMenu extends AbstractMenu {
 					e1.printStackTrace();
 				}
 				PlayGameMenu v = new PlayGameMenu();
-				v.setStep(30);
-				v.setObiettivo(1800);
+				v.setStep(Utility.num_mosse);
+				v.setObiettivo(Utility.difficult_ob);
+				v.setDiff("DIFFICULT ");
 				closePage();
 			}
 		});
 		
 		//label's options
-		this.question.setFont(new Font("Arial",Font.BOLD,16));
+		this.question.setFont(new Font("Arial",Font.BOLD,24));
 
-		((JComponent) this.getContentPane()).setOpaque(true);
-		this.getContentPane().setBackground(Color.GREEN);
-		
-		this.getContentPane().add(pq, BorderLayout.NORTH);
-		this.getContentPane().add(p, BorderLayout.CENTER);
-		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	
-	private void lookButton(JRadioButton b){
-		b.setBackground(Color.yellow);
-		b.setBorderPainted(false);
-	}
-	
-	//ActionListener
-	//modificare con il numero di mosse!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	/*private class Click implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			new View();
-			closePage();
-		}
-		
-	}*/
 }

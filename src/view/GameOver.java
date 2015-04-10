@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+
 import javax.swing.*;
 
 public class GameOver extends AbstractMenu {
@@ -28,7 +29,8 @@ public class GameOver extends AbstractMenu {
 		
 		// button play
 		JPanel app = new JPanel(new FlowLayout());
-		this.lookButton(play);
+		this.lookButton(play, Color.yellow, false);
+		
 		this.lookPanel(app, Color.yellow);
 		this.play.addActionListener(new ActionListener() {
 			
@@ -39,7 +41,8 @@ public class GameOver extends AbstractMenu {
 		});
 		this.play.setFont(new Font("Arial",Font.BOLD,20));
 		
-		this.lookButton(exit);
+		this.lookButton(exit, Color.yellow, false);
+
 		this.exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Question();
@@ -63,12 +66,14 @@ public class GameOver extends AbstractMenu {
 		this.setVisible(true);
 	}
 	
-	private void lookButton(JButton b){
-		b.setBackground(Color.yellow);
+	/*public void lookButton(JButton b, Color c){
+		//b.setBackground(Color.yellow);
+		lookButton(b, c);
 		b.setBorderPainted(false);
-	}
+	}*/
 	
 	public static void main(String[] args) {
 		new GameOver();
 	}
+
 }

@@ -5,264 +5,277 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * 
+ * 
+ * @author Beatrice Ricci
+ */
+
+
 public class PlayGameMenu extends AbstractMenu implements IPlayMenu{
 
 	private static final long serialVersionUID = 6751617017799096695L;
 	
-	private JPanel panel;
-	private JPanel matrixPanel;
+	private final JPanel panel;
+	private final JPanel matrixPanel;
 	
-	private Butt matrix[][] = new Butt[Utility.dim1][Utility.dim2];
-	private Model modelW = new Model();
-	private Controller c = new Controller(this, modelW);
+	private final Butt matrix[][] = new Butt[Utility.dim1][Utility.dim2];
+	private final Model modelW = new Model();
+	private final Controller c = new Controller(this, modelW);
 	
 	private JLabel step = new JLabel(" ");
 	private JLabel tot = new JLabel (" "); 
 	private JLabel obiettivo = new JLabel(" ");
+	private JLabel level = new JLabel(" ");
 	
 	public PlayGameMenu(){
+		
 		this.setSize(((Utility.dim1*Utility.hbutt)+250), ((Utility.dim1*Utility.lbutt)+150));
 		this.setResizable(false);
 		
-		panel = new JPanel(new BorderLayout());
+		this.panel = new JPanel(new BorderLayout());
 		
-		matrixPanel = new JPanel(new GridLayout(Utility.dim1, Utility.dim2));
-		matrixPanel.setSize((Utility.dim1*Utility.hbutt), (Utility.dim2*Utility.lbutt));
+		this.matrixPanel = new JPanel(new GridLayout(Utility.dim1, Utility.dim2));
+		this.matrixPanel.setSize((Utility.dim1*Utility.hbutt), (Utility.dim2*Utility.lbutt));
 		
-		panel.add(matrixPanel, BorderLayout.CENTER);
-		panel.add(this.setNorthPanel(), BorderLayout.NORTH);
-		panel.add(this.setWestPanel(), BorderLayout.WEST);
-		panel.add(this.setSouthPanel(), BorderLayout.SOUTH);
-		panel.add(this.setEastPanel(), BorderLayout.EAST);
-		
-		for(int i = 0; i < Utility.dim1; i++){
-			for(int j = 0; j < Utility.dim2; j++){
-				matrix[i][j] = new Butt(i, j);
-				if (modelW.getNum(i, j) == 0){
-					matrix[i][j].setIcon(Utility.blue);
-				}else if (modelW.getNum(i, j) == 1){
-					matrix[i][j].setIcon(Utility.yellow);
-				}else if (modelW.getNum(i, j) == 2){
-					matrix[i][j].setIcon(Utility.green);
-				}else if (modelW.getNum(i, j) == 3){
-					matrix[i][j].setIcon(Utility.violet);
-				}else if (modelW.getNum(i, j) == 4){
-					matrix[i][j].setIcon(Utility.orange);
-				}else if (modelW.getNum(i, j) == 5){
-					matrix[i][j].setIcon(Utility.red);
-				}
-				matrix[i][j].addActionListener(c);
-				matrixPanel.add(matrix[i][j]);	
-			}
-		}	
-		
-		//TU QUI NON CI PUOI STARE!!!!!!!!!!!!!!!!!!(PERO' FUNZI ZIO CANE)
-		
-		while(modelW.checkTris()){
-			this.updateView(this.getPanel(), modelW.getMat());
-		}
-		while(!modelW.checkNextMove()){
-			modelW.shuffle();
-			new Shuffle();
-			this.updateView(this.getPanel(), modelW.getMat());
-		}
-		modelW.setPunteggio(0);
-		this.updateTot();
+		this.updatePanel();
+		this.drawFirstMatrix();
+		this.inizialize();
 	
-	
-		this.getContentPane().add(panel);
+		this.getContentPane().add(this.panel);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
 	}
 	
-	
-	public JPanel getPanel(){
-		return this.matrixPanel;
+	private void inizialize(){
+		
+		this.modelW.setPunteggio(0);
+		this.updateTot();
 	}
 	
-	//li uso ??
-	/*public String getTotNumber(){
-		return this.tot.getText();
+	/**
+	 * 
+	 */
+	private void updatePanel(){
+		this.panel.add(this.matrixPanel, BorderLayout.CENTER);
+		this.panel.add(this.setNorthPanel(), BorderLayout.NORTH);
+		this.panel.add(this.setWestPanel(), BorderLayout.WEST);
+		this.panel.add(this.setSouthPanel(), BorderLayout.SOUTH);
+		this.panel.add(this.setEastPanel(), BorderLayout.EAST);
 	}
 	
-	public String getStepNumber(){
-		return this.step.getText();
-	}*/
-	private void setTot(int num){
-		this.tot.setText(" "+num+" punti");
-		System.out.println(num);
-	}
-	
-	public void setStep(int n){
-		this.step.setText("  "+n+"  ");
-		modelW.setMosse(n);
-		System.out.println(modelW.getMosse());
-	}
-	
-	public void setObiettivo(int n){
-		this.obiettivo.setText("Obiettivo: "+n+" p");
-		modelW.setObiettivo(n);
-		System.out.println(modelW.getObiettivo());
-	}
-	
-	/*private Butt[][] getMatrix(){
-		return this.matrix;
-	}*/
-	
-	public void updateView(JPanel p, int m[][]){
-			
-		for(int i = 0; i < Utility.dim1; i++){
-			for(int j = 0; j < Utility.dim2; j++){
-				if (modelW.getNum(i, j) == -1){
-					matrix[i][j].setIcon(Utility.black);
-				}
-				//normal type
-				if (modelW.getNum(i, j) >= 0 && modelW.getNum(i, j)< 6){
-					if (modelW.getNum(i, j) == 0){
-						matrix[i][j].setIcon(Utility.blue);
-					}else if (modelW.getNum(i, j) == 1){
-						matrix[i][j].setIcon(Utility.yellow);
-					}else if (modelW.getNum(i, j) == 2){
-						matrix[i][j].setIcon(Utility.green);
-					}else if (modelW.getNum(i, j) == 3){
-						matrix[i][j].setIcon(Utility.violet);
-					}else if (modelW.getNum(i, j) == 4){
-						matrix[i][j].setIcon(Utility.orange);
-					}else if (modelW.getNum(i, j) == 5){
-						matrix[i][j].setIcon(Utility.red);
-					}
-				}
-				//stripped Ver type
-				else if (modelW.getNum(i, j) >= 6 && modelW.getNum(i, j) < 12){
-					if (modelW.getNum(i, j) == 6){
-						matrix[i][j].setIcon(Utility.blueSV);
-					}else if (modelW.getNum(i, j) == 7){
-						matrix[i][j].setIcon(Utility.yellowSV);
-					}else if (modelW.getNum(i, j) == 8){
-						matrix[i][j].setIcon(Utility.greenSV);
-					}else if (modelW.getNum(i, j) == 9){
-						matrix[i][j].setIcon(Utility.violetSV);
-					}else if (modelW.getNum(i, j) == 10){
-						matrix[i][j].setIcon(Utility.redSV);
-					}else if (modelW.getNum(i, j) == 11){
-						matrix[i][j].setIcon(Utility.yellowSV);
-					}
-				}//stripped Or type
-				else if (modelW.getNum(i, j) >= 12 && modelW.getNum(i, j) < 18){
-					if (modelW.getNum(i, j) == 12){
-						matrix[i][j].setIcon(Utility.blueSV);
-					}else if (modelW.getNum(i, j) == 13){
-						matrix[i][j].setIcon(Utility.yellowSV);
-					}else if (modelW.getNum(i, j) == 14){
-						matrix[i][j].setIcon(Utility.greenSV);
-					}else if (modelW.getNum(i, j) == 15){
-						matrix[i][j].setIcon(Utility.violetSV);
-					}else if (modelW.getNum(i, j) == 16){
-						matrix[i][j].setIcon(Utility.orangeSV);
-					}else if (modelW.getNum(i, j) == 17){
-						matrix[i][j].setIcon(Utility.redSV);
-					}
-				}//wrapped
-				else if (modelW.getNum(i, j) >= 18 && modelW.getNum(i, j) < 24){
-						if (modelW.getNum(i, j) == 18){
-							matrix[i][j].setIcon(Utility.blueW);
-						}else if (modelW.getNum(i, j) == 19){
-							matrix[i][j].setIcon(Utility.yellowW);
-						}else if (modelW.getNum(i, j) == 20){
-							matrix[i][j].setIcon(Utility.greenW);
-						}else if (modelW.getNum(i, j) == 21){
-							matrix[i][j].setIcon(Utility.violetW);
-						}else if (modelW.getNum(i, j) == 22){
-							matrix[i][j].setIcon(Utility.orangeW);
-						}else if (modelW.getNum(i, j) == 23){
-							matrix[i][j].setIcon(Utility.redW);
-						}
-				}//five
-				else if (modelW.getNum(i, j) == 24){
-						matrix[i][j].setIcon(Utility.five);
-				}
-				this.updateStep();
-				this.updateTot();
-			}		
-		}
-	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel setNorthPanel(){
-		//if mosseIniziali == ??  => EASY || MEDIUM || DIFFICULT LEVEL
 		JPanel pNorth = new JPanel(new BorderLayout());
-		JLabel level = new JLabel(" ??????? LEVEL");
-		level.setFont(new Font("Arial",Font.BOLD,14));
+		
+		this.level.setFont(new Font("Arial",Font.BOLD,14));
 		pNorth.add(level, BorderLayout.EAST);
 		this.lookPanel(pNorth, Color.cyan);
 		
 		return pNorth;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel setWestPanel(){
 		JPanel pWest = new JPanel(new BorderLayout());
-		JPanel internalPanel = new JPanel(new BorderLayout());
+		JPanel internalWestPanel = new JPanel(new BorderLayout());
 		
 		this.step.setFont(new Font("Arial",Font.BOLD,24));
-		//this.step.setOpaque(true);
-		////this.step.setBorder(new border);
-		//this.step.setBackground(Color.white);
-
+		
 		this.obiettivo.setFont(new Font("Arial",Font.BOLD,18));
 		this.obiettivo.setBackground(Color.white);
 		
 		this.tot.setFont(new Font("Arial",Font.BOLD,20));
 		this.tot.setBackground(Color.white);
-		
 		this.setTot(0);
 		
-		internalPanel.add(obiettivo, BorderLayout.NORTH);
-		internalPanel.add(tot, BorderLayout.CENTER);
+		internalWestPanel.add(obiettivo, BorderLayout.NORTH);
+		internalWestPanel.add(tot, BorderLayout.CENTER);
 		
 		pWest.add(step, BorderLayout.NORTH);
-		pWest.add(internalPanel,  BorderLayout.CENTER);
-		
+		pWest.add(internalWestPanel,  BorderLayout.CENTER);
 		
 		this.lookPanel(pWest, Color.cyan);
-		this.lookPanel(internalPanel, Color.cyan);
+		this.lookPanel(internalWestPanel, Color.cyan);
 		return pWest;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel setSouthPanel(){
 		JPanel pSouth = new JPanel(new BorderLayout());
 		JButton close = new JButton();
-		ImageIcon closeIm = new ImageIcon("res"+Utility.sep+"close.jpg");
-		close.setIcon(closeIm);
-		
-		pSouth.add(close, BorderLayout.WEST);
-		
+	
+		close.setIcon(Utility.closeIm);
 		close.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				new Question();
 			}
-			
 		});
+		pSouth.add(close, BorderLayout.WEST);
+		
 		this.lookPanel(pSouth, Color.cyan);
 		return pSouth;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	private JPanel setEastPanel(){
 		JPanel pEast = new JPanel(new BorderLayout());
-		JLabel est = new JLabel("             ");
-		pEast.add(est);
+		JLabel gap = new JLabel("     ");
+		pEast.add(gap);
 		
 		this.lookPanel(pEast, Color.cyan);
 		return pEast;
 	}
+	/**
+	 * Metodo per la creazione iniziale della schermata di gioco. In base agli interi che identificano il colore
+	 * presenti nella matrice di Element vengono creati dei Butt (e aggiunti alla matrice matrix[][]) con le rispettive icone.
+	 */
+	private void drawFirstMatrix(){
+		for(int i = 0; i < Utility.dim1; i++){
+			for(int j = 0; j < Utility.dim2; j++){
+				matrix[i][j] = new Butt(i, j);
+				
+				if (modelW.getNum(i, j) == Utility.blue){
+					matrix[i][j].setIcon(Utility.blueIC);
+				}else if (modelW.getNum(i, j) == Utility.yellow){
+					matrix[i][j].setIcon(Utility.yellowIC);
+				}else if (modelW.getNum(i, j) == Utility.green){
+					matrix[i][j].setIcon(Utility.greenIC);
+				}else if (modelW.getNum(i, j) == Utility.violet){
+					matrix[i][j].setIcon(Utility.violetIC);
+				}else if (modelW.getNum(i, j) == Utility.orange){
+					matrix[i][j].setIcon(Utility.orangeIC);
+				}else if (modelW.getNum(i, j) == Utility.red){
+					matrix[i][j].setIcon(Utility.redIC);
+				}
+				
+				matrix[i][j].addActionListener(c.getObserver());
+				matrixPanel.add(matrix[i][j]);	
+			}
+		}
+	}
+	/**
+	 * Aggiorno la label che mostra al giocatore il suo punteggio totale
+	 * @param num punteggio ottenuto grazie all'ultima mossa
+	 */
+	private void setTot(int num){
+		this.tot.setText(" "+num+" punti");
+	}
 	
-	private void updateStep(){
+	public void setStep(int n){
+		this.step.setText("  "+n+"  ");
+		this.modelW.setMosse(n);
+	}
+	
+	public void setObiettivo(int n){
+		this.obiettivo.setText("Obiettivo: "+n+" p");
+		this.modelW.setObiettivo(n);
+	}
+	
+	public void setDiff(String s){
+		this.level.setText(s+" LEVEL");
+	}
+
+	public void updateStep(){
 		int temp = modelW.getMosse();
 		this.setStep(temp);
 	}
 	
-	private void updateTot(){
+	public void updateTot(){
 		int temp = modelW.getPunteggio();
 		this.setTot(temp);
+	}
+	
+	public JPanel getPanel(){
+		return this.matrixPanel;
+	}
+	
+	public void updateView(){
+			
+		for(int i = 0; i < Utility.dim1; i++){
+			for(int j = 0; j < Utility.dim2; j++){
+				//if (modelW.getNum(i, j) == -1){
+					//matrix[i][j].setIcon(Utility.black);
+				//}
+				//normal type
+				if (modelW.getTypeEl(i, j) == Utility.normal){
+					if (modelW.getNum(i, j) == Utility.blue){
+						matrix[i][j].setIcon(Utility.blueIC);
+					}else if (modelW.getNum(i, j) == Utility.yellow){
+						matrix[i][j].setIcon(Utility.yellowIC);
+					}else if (modelW.getNum(i, j) == Utility.green){
+						matrix[i][j].setIcon(Utility.greenIC);
+					}else if (modelW.getNum(i, j) == Utility.violet){
+						matrix[i][j].setIcon(Utility.violetIC);
+					}else if (modelW.getNum(i, j) == Utility.orange){
+						matrix[i][j].setIcon(Utility.orangeIC);
+					}else if (modelW.getNum(i, j) == Utility.red){
+						matrix[i][j].setIcon(Utility.redIC);
+					}
+				}
+				//stripped Ver type
+				else if (modelW.getTypeEl(i, j) == Utility.stripedV){
+					if (modelW.getNum(i, j) == Utility.blue){
+						matrix[i][j].setIcon(Utility.blueSVIC);
+					}else if (modelW.getNum(i, j) == Utility.yellow){
+						matrix[i][j].setIcon(Utility.yellowSVIC);
+					}else if (modelW.getNum(i, j) == Utility.green){
+						matrix[i][j].setIcon(Utility.greenSVIC);
+					}else if (modelW.getNum(i, j) == Utility.violet){
+						matrix[i][j].setIcon(Utility.violetSVIC);
+					}else if (modelW.getNum(i, j) == Utility.orange){
+						matrix[i][j].setIcon(Utility.orangeSVIC);
+					}else if (modelW.getNum(i, j) == Utility.red){
+						matrix[i][j].setIcon(Utility.redSVIC);
+					}
+				}//stripped Or type
+				else if (modelW.getTypeEl(i, j) == Utility.stripedO){
+					if (modelW.getNum(i, j) ==  Utility.blue){
+						matrix[i][j].setIcon(Utility.blueSOIC);
+					}else if (modelW.getNum(i, j) ==  Utility.yellow){
+						matrix[i][j].setIcon(Utility.yellowSOIC);
+					}else if (modelW.getNum(i, j) ==  Utility.green){
+						matrix[i][j].setIcon(Utility.greenSOIC);
+					}else if (modelW.getNum(i, j) ==  Utility.violet){
+						matrix[i][j].setIcon(Utility.violetSOIC);
+					}else if (modelW.getNum(i, j) ==  Utility.orange){
+						matrix[i][j].setIcon(Utility.orangeSOIC);
+					}else if (modelW.getNum(i, j) ==  Utility.red){
+						matrix[i][j].setIcon(Utility.redSOIC);
+					}
+				}//wrapped
+				else if (modelW.getTypeEl(i, j) == Utility.wrapped){
+						if (modelW.getNum(i, j) == Utility.blue){
+							matrix[i][j].setIcon(Utility.blueWIC);
+						}else if (modelW.getNum(i, j) == Utility.yellow){
+							matrix[i][j].setIcon(Utility.yellowWIC);
+						}else if (modelW.getNum(i, j) == Utility.green){
+							matrix[i][j].setIcon(Utility.greenWIC);
+						}else if (modelW.getNum(i, j) == Utility.violet){
+							matrix[i][j].setIcon(Utility.violetWIC);
+						}else if (modelW.getNum(i, j) == Utility.orange){
+							matrix[i][j].setIcon(Utility.orangeWIC);
+						}else if (modelW.getNum(i, j) == Utility.red){
+							matrix[i][j].setIcon(Utility.redWIC);
+						}
+				}//five
+				else if (modelW.getTypeEl(i, j) == Utility.five){
+						matrix[i][j].setIcon(Utility.fiveIC);
+				}
+				this.updateStep();
+				this.updateTot();
+			}		
+		}
 	}
 }

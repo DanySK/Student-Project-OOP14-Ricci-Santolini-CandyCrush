@@ -1,12 +1,7 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
 public abstract class AbstractMenu extends JFrame implements IMenu {
 	
@@ -27,6 +22,12 @@ public abstract class AbstractMenu extends JFrame implements IMenu {
 	public void lookPanel(JPanel p, Color c){
 		p.setOpaque(true);
 		p.setBackground(c);
+	}
+	
+	public void lookButton(JButton b, Color c, boolean bool){
+		b.setOpaque(true);
+		b.setBackground(c);
+		b.setBorderPainted(bool);
 	}
 	
 	//da http://antoniotancredi.altervista.org/2010/05/04/java-utilizzare-unicona-in-una-jlabel/

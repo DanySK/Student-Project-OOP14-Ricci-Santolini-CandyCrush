@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+
 import javax.swing.*;
 
 public class Win extends AbstractMenu{
@@ -30,7 +31,7 @@ public class Win extends AbstractMenu{
 		JPanel app = new JPanel(new FlowLayout());
 		this.lookPanel(app, Color.cyan);
 		
-		this.lookButton(play);
+		this.lookButton(play, Color.cyan, false);
 		this.play.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -40,7 +41,7 @@ public class Win extends AbstractMenu{
 		});
 		this.play.setFont(new Font("Arial",Font.BOLD,20));
 		
-		this.lookButton(exit);
+		this.lookButton(exit, Color.cyan, false);
 		this.exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Question();
@@ -61,11 +62,6 @@ public class Win extends AbstractMenu{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
-	}
-	
-	private void lookButton(JButton b){
-		b.setBackground(Color.cyan);
-		b.setBorderPainted(false);
 	}
 	
 	public static void main(String[] args) {

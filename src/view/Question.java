@@ -27,8 +27,4 @@ public class Question extends AbstractMenu {
 		}
 		
 	}
-	
-	public static void main(String[] args) {
-		new Question();
-	}
 }

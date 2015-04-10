@@ -1,10 +1,7 @@
 package view;
 
 import java.awt.Color;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public interface IMenu {
 	
@@ -15,6 +12,8 @@ public interface IMenu {
 	public void closePage();
 	
 	public void lookPanel(JPanel p, Color c);
+	
+	public void lookButton(JButton b, Color c, boolean bool);
 	
 	public JLabel createLabel(String text, ImageIcon icon,int hPos, int vPos);
 }
