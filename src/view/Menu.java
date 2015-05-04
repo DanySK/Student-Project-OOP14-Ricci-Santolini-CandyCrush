@@ -4,10 +4,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
+/**
+ * Classe che contiene il menù iniziale.
+ * E' possibile scegliere di iniziare subito a giocare, di leggere le istruzioni di gioco o di chiudere l'applicazione
+ * 
+ * @author Beatrice Ricci
+ *
+ */
 public class Menu extends AbstractMenu {
 
 	private static final long serialVersionUID = -8627423879053598019L;
+	
+	private static final int WIDTH_DIMENSION = 2;
+	private static final int HEIGHT_DIMENSION = 10;
 	
 	private JButton start = new JButton();
 	private JButton instructions = new JButton();
@@ -15,27 +24,27 @@ public class Menu extends AbstractMenu {
 	
 	public Menu(){
 		//title
-		this.setTheTitle("W E L C O M E");
+		this.setTitle("W E L C O M E");
 		
 		//dimension
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
-		int taglia = (int)size.getWidth()/2;
-		this.setSize(taglia, taglia-((int)size.getHeight()/10));
+		int dimension = (int)size.getWidth()/WIDTH_DIMENSION;
+		this.setSize(dimension, dimension-((int)size.getHeight()/HEIGHT_DIMENSION));
 		this.setResizable(false);
 		
 		//create principal panel
-		JPanel panel = new MyPanel();
+		JPanel panel = new MyPanel(ViewUtility.caramelle);
 		panel.setLayout(new FlowLayout());
 		
-		this.start.setIcon(Utility.icStart);
-		this.lookButton(start, Color.pink, false);
+		this.start.setIcon(ViewUtility.icStart);
+		this.lookButton(this.start, Color.PINK, false);
 		
-		this.instructions.setIcon(Utility.icInstr);
-		this.lookButton(instructions, Color.pink, false);
+		this.instructions.setIcon(ViewUtility.icInstr);
+		this.lookButton(this.instructions, Color.PINK, false);
 		
-		this.exit.setIcon(Utility.icExit);
-		this.lookButton(exit, Color.pink, false);
+		this.exit.setIcon(ViewUtility.icExit);
+		this.lookButton(this.exit, Color.PINK, false);
 		
 		//add ActionListener to Buttons
 		this.start.addActionListener(new ActionListener() {

@@ -3,14 +3,15 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Classe astratta che contiene metodi che caratterizzano tutte le GUI del Package. 
+ * 
+ * @author Beatrice Ricci
+ */
 public abstract class AbstractMenu extends JFrame implements IMenu {
 	
 	private static final long serialVersionUID = -2154453298222711291L;
 
-	public void setTheTitle(String title){
-		this.setTitle(title);
-	}
-	
 	public void closeGame(){
 		System.exit(1);
 	}

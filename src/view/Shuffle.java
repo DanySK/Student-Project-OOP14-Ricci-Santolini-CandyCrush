@@ -4,32 +4,30 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
-
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * Classe il cui compito è far apparire per qualche secondo il messaggio di shuffle degli elementi della matrice principale
+ * di gioco quando non ci sono più mosse possibili.
+ * 
+ * @author Beatrice Ricci
+ *
+ */
 public class Shuffle extends AbstractMenu{
 
 	private static final long serialVersionUID = -1183169779251815974L;
 	
-	private final static String sep = File.separator;
-	private ImageIcon icon = new ImageIcon("res"+sep+"shuffle.jpg");
-	private JLabel label = createLabel(" ", icon, JLabel.CENTER, JLabel.TOP);
+	private JLabel label = createLabel(" ", ViewUtility.shuffle, JLabel.CENTER, JLabel.TOP);
 	
 	public Shuffle(){
-		//title
-		this.setTheTitle("Shuffle!!");
+		this.setTitle("Shuffle!!");
 		
-		//dimension
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		int taglia = (int)size.getWidth()/3;
 		this.setSize(taglia, taglia/2);
 		this.setResizable(false);
 		
-		//principal panel
 		JPanel panel = new JPanel(new BorderLayout());
 		this.lookPanel(panel, Color.white);
 		panel.add(label, BorderLayout.CENTER);
@@ -39,15 +37,16 @@ public class Shuffle extends AbstractMenu{
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	public static void main(String[] args) {
-		Shuffle s = new Shuffle();
+	/**
+	 * Metodo per far apparire e scomparire il  messaggio di shuffle in modo che sia chiaro all'utente
+	 */
+	public void goShuffle(){
 		try {
+			new Shuffle();
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//s.setVisible(false);
-		s.closePage();
+		this.closePage();
 	}
-
 }
