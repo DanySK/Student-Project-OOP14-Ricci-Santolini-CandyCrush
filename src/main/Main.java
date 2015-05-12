@@ -1,14 +1,19 @@
 package main;
 
-import view.*;
+import view.Menu;
+
 /**
- * Classe per l'avvio dell'applicazione
+ * Classe per l'avvio dell'applicazione.
  * 
  * @author Beatrice Ricci
  *
  */
 public class Main {
-	public static void main(String[] args) {
+	/**
+	 * Metodo che lancia il main dell'applicazione.
+	 * @param args a
+	 */
+	public static void main(final String[] args) {
 		new Menu();
 	}
 }

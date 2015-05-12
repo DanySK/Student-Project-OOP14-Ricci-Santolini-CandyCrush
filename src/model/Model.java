@@ -1,38 +1,36 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import controller.Utility;
 
 /**
  * Classe che contiene il core della parte di model dell'applicazione, in 
- * particolare la matrice di gioco degli elementi
+ * particolare la matrice di gioco degli elementi.
  * 
  * @author Nicola Santolini
  *
  */
-public class Model implements IModel{
+public class Model implements IModel {
 	
-	private Element mat[][] = new Element[Utility.dim1][Utility.dim2];
+	private Element[][] mat = new Element[Utility.DIM1][Utility.DIM2];
 	
-	private int score = 0;
+	private int score;
 	private int target;
 	private int step;
 	
-	private IChecks checker;
-	
-	private TrisBehaviour trisController;
-	private PokerBehaviour pokerController;
-	private WrappedBehaviour wrappedController;
-	private FiveBehaviour fiveController;
-	
-	public Model(){
+	private final IChecks checker;
+	private final TrisBehaviour trisController;
+	private final PokerBehaviour pokerController;
+	private final WrappedBehaviour wrappedController;
+	private final FiveBehaviour fiveController;
 		
-		for(int i = 0; i< Utility.dim1; i++){	
-			for(int j = 0; j< Utility.dim2; j++){
-				mat[i][j] = new Element(generate());
+	/**
+	 * Costruttore.
+	 */
+	public Model() {
+		
+		for (int i = 0; i < Utility.DIM1; i++) {	
+			for (int j = 0; j < Utility.DIM2; j++) {
+				mat[i][j] = new Element(ModelUtilities.generate());
 			}
 		}
 		
@@ -41,75 +39,84 @@ public class Model implements IModel{
 		this.pokerController = new PokerBehaviour();
 		this.wrappedController = new WrappedBehaviour();
 		this.fiveController = new FiveBehaviour();
-	
-		this.creation();
 	}
 	
 	/**
-	 * Metodo che dopo la prima inizializzazione della matrice di gioco
-	 * la controlla e rimescola finchè non si trova in una situazione corretta per
-	 * iniziare a giocare: nessun tris già in posizione ma almeno uno realizzabile in
-	 * una mossa
+	 * Metodo che dopo la prima inizializzazione della matrice di gioco la controlla 
+	 * e rimescola finchè non si trova in una situazione corretta per iniziare a giocare: 
+	 * nessun tris già in posizione ma almeno uno realizzabile in una mossa.
 	 */
-	private void creation(){
+	public void creation() {
 		
-		while(!checker.checkNextMove(this.mat) || checker.checkTris(this.mat)){
-			this.shuffle();
+		while (!checker.checkNextMove(this.mat) || checker.checkTris(this.mat)) {
+			ModelUtilities.shuffle(this.mat);
 		}
 	}
 	
-	public void decStep(){
+	@Override
+	public void decStep() {
 		this.step--;
 	}
 	
-	public int getScore(){
+	@Override
+	public int getScore() {
 		return this.score;
 	}
 	
-	public int getStep(){
+	@Override
+	public int getStep() {
 		return this.step;
 	}
 		
-	public int getTarget(){
+	@Override
+	public int getTarget() {
 		return this.target;
 	}
 			
-	public int getColor(int i, int j){
+	@Override
+	public int getColor(final int i, final int j) {
 		return this.mat[i][j].getColorNumber();
 	}	
 	
-	public int getTypeEl(int i, int j){
+	@Override
+	public int getTypeEl(final int i, final int j) {
 		return this.mat[i][j].getType();
 	}
 	
-	public Element[][] getMat(){
+	@Override
+	public Element[][] getMat() {
 		return this.mat;
 	}
 	
-	public void setStep(int num){
+	@Override
+	public void setStep(final int num) {
 		this.step = num;
 	}
 	
-	public void incScore(int num){
+	@Override
+	public void incScore(final int num) {
 		this.score = this.getScore() + num;
 	}
 	
-	public void setTarget(int num){
+	@Override
+	public void setTarget(final int num) {
 		this.target = num;
 	}
 	
-	public  boolean checkExchange(int x1, int y1, int x2, int y2){
-		if(x2 == x1-1 && y1 == y2 || //su
-			x1 == x2 && y2 == y1-1 || //sx
-			x1 == x2 && y2 == y1+1 || //dx
-			x2 == x1+1 && y1 == y2){ //giu
+	@Override
+	public  boolean checkExchange(final int x1, final int y1, final int x2, final int y2) {
+		if (x2 == x1 - 1 && y1 == y2 
+			|| x1 == x2 && y2 == y1 - 1 
+			|| x1 == x2 && y2 == y1 + 1 
+			|| x2 == x1 + 1 && y1 == y2) { 
 			return true;
 		}
 		return false;
 	}
 	
-	public void doExchange(int x1, int y1, int x2, int y2){
-		Element app = new Element();;
+	@Override
+	public void doExchange(final int x1, final int y1, final int x2, final int y2) {
+		final Element app = new Element();
 
 		app.setColorNumber(mat[x1][y1].getColorNumber());
 		app.setType(mat[x1][y1].getType());
@@ -121,72 +128,50 @@ public class Model implements IModel{
 		mat[x2][y2].setType(app.getType());
 	}
 		
-	public boolean goOn(){
+	@Override
+	public boolean goOn() {
 		return checker.checkTris(this.mat); 	
 	}
-		
-	public boolean checkNextMove(){
+	
+	@Override
+	public boolean checkNextMove() {
 		return checker.checkNextMove(this.mat);
 	}
 	
-	public int doFive(int c){
-		return fiveController.doFive(c, this.mat);
+	@Override
+	public int doFive(final int c) {
+		return fiveController.doFive(this.mat, c);
 	}
 	
-	public void gameLoop(){
+	@Override
+	public void gameLoop() {
 		
-		if(checker.checkFiveOrizontal(mat)){
-			fiveController.doHorizontalFive(mat);
-			incScore(500);
-		}
-		else if(checker.checkFiveVertical(mat)){
-			fiveController.doVerticalFive(mat);
-			incScore(500);
-		}
-		else if(checker.checkWrapped(mat)){
-			wrappedController.controlWrapped(mat);
-			incScore(250);
-		}
-		else if(checker.checkPokerVertical(mat)){
-			pokerController.doVerticalPoker(mat);
-			incScore(250);
-		}
-		else if(checker.checkPokerOrizontal(mat)){
-			pokerController.doHorizontalPoker(mat);
-			incScore(250);
-		}
-		else if(checker.checkTrisVertical(mat)){
-			trisController.doVerticalTris(mat);
-			incScore(100);
-		}
-		else if(checker.checkTrisOrizontal(mat)){
-			trisController.doHorizontalTris(mat);
-			incScore(100);
+		if (checker.checkFiveHorizontal(this.mat)) {
+			fiveController.doHorizontalFive(this.mat);
+			incScore(ModelUtilities.SPECIAL_POINTS);
+		} else if (checker.checkFiveVertical(this.mat)) {
+			fiveController.doVerticalFive(this.mat);
+			incScore(ModelUtilities.SPECIAL_POINTS);
+		} else if (checker.checkWrapped(this.mat)) {
+			wrappedController.controlWrapped(this.mat);
+			incScore(ModelUtilities.WRAPPED_POINTS);
+		} else if (checker.checkPokerVertical(this.mat)) {
+			pokerController.doVerticalPoker(this.mat);
+			incScore(ModelUtilities.STRIPED_POINTS);
+		} else if (checker.checkPokerHorizontal(this.mat)) {
+			pokerController.doHorizontalPoker(this.mat);
+			incScore(ModelUtilities.STRIPED_POINTS);
+		} else if (checker.checkTrisVertical(this.mat)) {
+			trisController.doVerticalTris(this.mat);
+			incScore(ModelUtilities.TRIS_POINTS);
+		} else if (checker.checkTrisHorizontal(this.mat)) {
+			trisController.doHorizontalTris(this.mat);
+			incScore(ModelUtilities.TRIS_POINTS);
 		}	
 		
-		while(!checker.checkNextMove(mat)){
-			this.shuffle();
+		while (!checker.checkNextMove(this.mat)) {
+			ModelUtilities.shuffle(this.mat);
 		}
 		
 	}
-
-	public void shuffle(){
-		List<Element> list = new ArrayList<>();
-		
-		for(int i = 0; i < Utility.dim1; i++){
-			for(int j = 0; j < Utility.dim2; j++){
-				list.add(mat[i][j]);
-			}
-		}
-		Collections.shuffle(list);		
-		Iterator<Element> it = list.iterator();
-		
-		for(int i = 0; i < Utility.dim1; i++){
-			for(int j = 0; j < Utility.dim2; j++){
-				mat[i][j] = it.next();
-			}
-		}
-	}
-
-
 }

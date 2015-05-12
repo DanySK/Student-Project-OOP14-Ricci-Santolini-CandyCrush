@@ -1,141 +1,161 @@
 package controller;
 
 import javax.swing.SwingUtilities;
-
-import view.*;
-import model.*;
+import view.GameOver;
+import view.PlayGameMenu;
+import view.Shuffle;
+import view.Update;
+import view.Win;
+import model.Model;
+import model.ModelUtilities;
 /**
- * Classe che contiene il Controller dell'applicazione, che fa quindi da intermediario fra model e view come da pattern MVC
+ * Classe che contiene il Controller dell'applicazione, che fa quindi da intermediario fra model e view come da pattern MVC.
  * 
  * @author Beatrice Ricci, Nicola Santolini
  *
  */
-public class Controller implements ViewObserver, IController{
+public class Controller implements ViewObserver, IController {
 	
 	private final Model model;
 	private final PlayGameMenu view;
 	private final Update up;
 	private final Listener observer;
-		
-	public Controller(PlayGameMenu v){
+	
+	/**
+	 * Costruttore del controller.
+	 * 
+	 * @param v schermata principale di gioco
+	 */
+	public Controller(final PlayGameMenu v) {
 		this.model = new Model();
 		this.view = v;
 		this.up = new Update(this, this.view);
 		
 		this.observer = new Listener();
 		this.observer.addObserver(this);
+		
+		model.creation();
 	}
 	
-	public int getModelNum(int i, int j){
+	@Override
+	public int getModelNum(final int i, final int j) {
 		return model.getColor(i, j);
 	}
 	
-	public int getModelType(int i, int j){
+	@Override
+	public int getModelType(final int i, final int j) {
 		return model.getTypeEl(i, j);
 	}
 	
-	public int getModelStep(){
+	@Override
+	public int getModelStep() {
 		return model.getStep();
 	}
 	
-	public int getModelTot(){
+	@Override
+	public int getModelTot() {
 		return model.getScore();
 	}
 	
-	public void setModelStep(int t){
+	@Override
+	public void setModelStep(final int t) {
 		model.setStep(t);
 	}
 	
-	public void setModelTarget(int t){
+	@Override
+	public void setModelTarget(final int t) {
 		model.setTarget(t);
 	}
 	
-	private void finalControl(){
-		//CONTROLLI VITTORIA/SCONFITTA
-		if((this.model.getStep() == 0 && this.model.getScore() >= this.model.getTarget()) || 
-				(this.model.getScore() >= this.model.getTarget())){
-			this.view.closePage();
-			new Win();
-		}
-		if(this.model.getStep() == 0 && this.model.getScore() < this.model.getTarget()){
-			this.view.closePage();
-			new GameOver();
-		}
-	}
-	
-	public Listener getObserver(){
+	@Override
+	public Listener getObserver() {
 		return this.observer;
 	}
 	
-	public void update(int x1, int y1, int x2, int y2) {
-		if(model.checkExchange(x1, y1, x2, y2)){
+	@Override
+	public void update(final int x1, final int y1, final int x2, final int y2) {
+		if (model.checkExchange(x1, y1, x2, y2)) {
 			model.doExchange(x1, y1, x2, y2);
 			up.updateView();
 			//CARAMELLA DA 5
-			if(model.getMat()[x1][y1].getType() == Utility.five
-				|| model.getMat()[x2][y2].getType() == Utility.five){
+			if (model.getMat()[x1][y1].getType() == Utility.FIVE
+				|| model.getMat()[x2][y2].getType() == Utility.FIVE) {
 				
-				if(model.getMat()[x1][y1].getType() == Utility.five){
-					model.getMat()[x1][y1].setColorNumber(model.generate());
-					model.getMat()[x1][y1].setType(Utility.normal);
-					int n = model.doFive(model.getMat()[x2][y2].getColorNumber());
-					model.incScore(n * 50);
+				if (model.getMat()[x1][y1].getType() == Utility.FIVE) {
+					model.getMat()[x1][y1].setColorNumber(ModelUtilities.generate());
+					model.getMat()[x1][y1].setType(Utility.NORMAL);
+					final int n = model.doFive(model.getMat()[x2][y2].getColorNumber());
+					model.incScore(n * Utility.BONUS_POINTS);
 				}
-				if(model.getMat()[x2][y2].getType() == Utility.five){
-					model.getMat()[x2][y2].setColorNumber(model.generate());
-					model.getMat()[x2][y2].setType(Utility.normal);
-					int n = model.doFive(model.getMat()[x1][y1].getColorNumber());
-					model.incScore(n * 50);
+				if (model.getMat()[x2][y2].getType() == Utility.FIVE) {
+					model.getMat()[x2][y2].setColorNumber(ModelUtilities.generate());
+					model.getMat()[x2][y2].setType(Utility.NORMAL);
+					final int n = model.doFive(model.getMat()[x1][y1].getColorNumber());
+					model.incScore(n * Utility.BONUS_POINTS);
 				}
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Thread.sleep(500);
+							Thread.sleep(Utility.HALF_SECOND);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+							System.out.println(e);	
 						}
 						up.updateView();
 						finalControl();
 					}
 				});
 			}
-			//NON HAI FATTO TRIS -> UNDO
-			if(!model.goOn()){
+			//HAI FATTO TRIS -> DO
+			if (model.goOn()) {
+				//NON HAI FATTO TRIS -> UNDO
+				model.decStep();
+				SwingUtilities.invokeLater(new Runnable() {		
+					public void run() {	
+						while (model.goOn()) {
+							try {
+								Thread.sleep(Utility.HALF_SECOND);
+							} catch (InterruptedException e) {
+								System.out.println(e);
+							}		
+							model.gameLoop();	
+							up.updateView();					
+						}
+						finalControl();
+						while (!model.checkNextMove()) {
+							ModelUtilities.shuffle(model.getMat());
+							new Shuffle().goShuffle();
+						}
+					}
+				});
+			
+			} else { 
 				SwingUtilities.invokeLater(new Runnable() {	
 					public void run() {
 						try {
-							Thread.sleep(500);
+							Thread.sleep(Utility.HALF_SECOND);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
+							System.out.println(e);
 						}
 						model.doExchange(x1, y1, x2, y2);
 						up.updateView();	
 					}
 				});
-			}
-			//HAI FATTO TRIS -> DO
-			else{
-				model.decStep();
-				SwingUtilities.invokeLater(new Runnable() {		
-						public void run() {	
-							while(model.goOn()){
-								try {
-									Thread.sleep(500);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}		
-								model.gameLoop();	
-								up.updateView();					
-							}
-							finalControl();
-							while(!model.checkNextMove()){
-								model.shuffle();
-								new Shuffle().goShuffle();
-							}
-						}
-					});
+				
 			}
 			up.updateView();
+		}
+	}
+	
+	private void finalControl() {
+		//CONTROLLI VITTORIA/SCONFITTA
+		if (this.model.getStep() == 0 && this.model.getScore() >= this.model.getTarget() 
+				|| this.model.getScore() >= this.model.getTarget()) {
+			this.view.closePage();
+			new Win();
+		}
+		if (this.model.getStep() == 0 && this.model.getScore() < this.model.getTarget()) {
+			this.view.closePage();
+			new GameOver();
 		}
 	}
 }

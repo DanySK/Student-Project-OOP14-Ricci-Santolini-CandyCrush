@@ -1,9 +1,14 @@
 package view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
 /**
  * Classe che contiene il menù iniziale.
  * E' possibile scegliere di iniziare subito a giocare, di leggere le istruzioni di gioco o di chiudere l'applicazione
@@ -18,68 +23,55 @@ public class Menu extends AbstractMenu {
 	private static final int WIDTH_DIMENSION = 2;
 	private static final int HEIGHT_DIMENSION = 10;
 	
-	private JButton start = new JButton();
-	private JButton instructions = new JButton();
-	private JButton exit = new JButton();
+	private final JButton start = new JButton();
+	private final JButton instructions = new JButton();
+	private final JButton exit = new JButton();
 	
-	public Menu(){
+	/**
+	 * Costruttore.
+	 */
+	public Menu() {
 		//title
 		this.setTitle("W E L C O M E");
 		
 		//dimension
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
-		int dimension = (int)size.getWidth()/WIDTH_DIMENSION;
-		this.setSize(dimension, dimension-((int)size.getHeight()/HEIGHT_DIMENSION));
+		final int dimension = (int) size.getWidth() / WIDTH_DIMENSION;
+		this.setSize(dimension, dimension - ((int) size.getHeight() / HEIGHT_DIMENSION));
 		this.setResizable(false);
 		
 		//create principal panel
-		JPanel panel = new MyPanel(ViewUtility.caramelle);
+		final JPanel panel = new MyPanel(ViewUtility.CARAMELLE);
 		panel.setLayout(new FlowLayout());
 		
-		this.start.setIcon(ViewUtility.icStart);
+		this.start.setIcon(ViewUtility.IC_START);
 		this.lookButton(this.start, Color.PINK, false);
 		
-		this.instructions.setIcon(ViewUtility.icInstr);
+		this.instructions.setIcon(ViewUtility.IC_INSTR);
 		this.lookButton(this.instructions, Color.PINK, false);
 		
-		this.exit.setIcon(ViewUtility.icExit);
+		this.exit.setIcon(ViewUtility.IC_EXIT);
 		this.lookButton(this.exit, Color.PINK, false);
 		
 		//add ActionListener to Buttons
 		this.start.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+			public void actionPerformed(final ActionEvent e) {
 				new DifficultMenu();
 				closePage();
 			}
-			
 		});
 		
 		this.instructions.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent e) {
 				new Instructions();
 			}
-			
 		});
 		
 		this.exit.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+			public void actionPerformed(final ActionEvent e) {
 				closeGame();
 			}
-			
 		});
 		
 		panel.add(this.start);

@@ -5,30 +5,55 @@ import java.io.File;
 
 import javax.swing.ImageIcon;
 /**
- * Classe contenente costanti riservate alla view
+ * Classe contenente costanti riservate alla view.
  * 
  * @author Beatrice Ricci
  *
  */
-public class ViewUtility {
-	public final static String SEP = File.separator;
+public final class ViewUtility {
+	private static final String RES = "res";
 	
-	//immagine per il JButton di uscita
-	public final static ImageIcon closeIm = new ImageIcon("res"+SEP+"close.jpg");
+	/**
+	 * Separatore.
+	 */
+	public static final String SEP = File.separator;
 	
-	//sfondi per pannelli
-	public final static Image caramelle = new ImageIcon("res"+SEP+"caramelle.jpg").getImage();
-	public final static Image pois = new ImageIcon("res"+ ViewUtility.SEP +"pois.jpg").getImage();
+	/**
+	 * Immagine per il JButton di uscita.
+	 */
+	public static final ImageIcon CLOSE_IM = new ImageIcon(RES + SEP + "close.jpg");
 	
-	//immagine per lo shuffle
-	public final static ImageIcon shuffle = new ImageIcon("res"+SEP+"shuffle.jpg");
+	/**
+	 * Sfondo per il pannello del menù iniziale.
+	 */
+	public static final Image CARAMELLE = new ImageIcon(RES + SEP + "caramelle.jpg").getImage();
+	/**
+	 * Sfondo per il pannello di scelta del livello di difficoltà.
+	 */
+	public static final Image POIS = new ImageIcon(RES + SEP + "pois.jpg").getImage();
 	
-	//icone JButtons del menu
-	public final static ImageIcon icStart = new ImageIcon("res"+SEP+"start.jpg");
-	public final static ImageIcon icInstr = new ImageIcon("res"+SEP+"instr.jpg");
-	public final static ImageIcon icExit = new ImageIcon("res"+SEP+"exit.jpg");
+	/**
+	 * Immagine per la schermata di shuffle.
+	 */
+	public static final ImageIcon SHUFFLE = new ImageIcon(RES + SEP + "shuffle.jpg");
 	
-	//percorso file istruzioni
-	public final static String filePath = "res"+SEP+"doc"+SEP+"instr.txt";
-		
+	/**
+	 * Icona del JButtons START del menu iniziale.
+	 */
+	public static final ImageIcon IC_START = new ImageIcon(RES + SEP + "start.jpg");
+	/**
+	 * Icona del JButtons INSTRUCTION del menu iniziale.
+	 */
+	public static final ImageIcon IC_INSTR = new ImageIcon(RES + SEP + "instr.jpg");
+	/**
+	 * Icona del JButtons EXIT del menu iniziale.
+	 */
+	public static final ImageIcon IC_EXIT = new ImageIcon(RES + SEP + "exit.jpg");
+	
+	/**
+	 * Percorso file istruzioni.
+	 */
+	public static final String FILE_PATH = RES + SEP + "doc" + SEP + "instr.txt";
+	
+	private ViewUtility() { }
 }

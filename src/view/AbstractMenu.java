@@ -1,7 +1,12 @@
 package view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * Classe astratta che contiene metodi che caratterizzano tutte le GUI del Package. 
@@ -11,31 +16,37 @@ import javax.swing.*;
 public abstract class AbstractMenu extends JFrame implements IMenu {
 	
 	private static final long serialVersionUID = -2154453298222711291L;
-
-	public void closeGame(){
-		System.exit(1);
+	private static final int DIMENSION_FONT_50 = 50;
+	private static final String TYPE_FONT = "Arial";
+	
+	@Override
+	public void closeGame() {
+		System.exit(0);
 	}
 	
-	public void closePage(){
+	@Override
+	public void closePage() {
 		this.setVisible(false);
 	}
 	
-	public void lookPanel(JPanel p, Color c){
+	@Override
+	public void lookPanel(final JPanel p, final Color c) {
 		p.setOpaque(true);
 		p.setBackground(c);
 	}
 	
-	public void lookButton(JButton b, Color c, boolean bool){
+	@Override
+	public void lookButton(final JButton b, final Color c, final boolean bool) {
 		b.setOpaque(true);
 		b.setBackground(c);
 		b.setBorderPainted(bool);
 	}
 	
 	//da http://antoniotancredi.altervista.org/2010/05/04/java-utilizzare-unicona-in-una-jlabel/
-	public JLabel createLabel(String text, ImageIcon icon,int hPos, int vPos)
-	{
-	    JLabel label = new JLabel(text, icon, JLabel.CENTER);
-	    label.setFont(new Font("Arial",Font.BOLD,50));
+	@Override
+	public JLabel createLabel(final String text, final ImageIcon icon, final int hPos, final int vPos) {
+	    final JLabel label = new JLabel(text, icon, JLabel.CENTER);
+	    label.setFont(new Font(TYPE_FONT, Font.BOLD, DIMENSION_FONT_50));
 	    label.setHorizontalTextPosition(hPos);
 	    label.setVerticalTextPosition(vPos);
 	    return label;

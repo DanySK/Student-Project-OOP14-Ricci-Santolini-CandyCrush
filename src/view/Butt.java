@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import javax.swing.JButton;
 import controller.Utility;
+
 /**
  * Classe che implementa l'interfaccia IButt e estende la classe JButton facendo in modo che ogni pulsante sia 
  * caratterizzato da due coordinate.
@@ -17,25 +18,34 @@ public class Butt extends JButton implements IButt {
 	private final int posX;
 	private final int posY;
 	
-	public Butt(int x, int y) {
+	/**
+	 * Costruttore dell'oggetto Butt.
+	 * 
+	 * @param x prima coordinata
+	 * @param y seconda coordinata
+	 */
+	public Butt(final int x, final int y) {
 		this.posX = x;
 		this.posY = y;
 		this.setLookButt();
 	}
 	
-	public int getPosX(){
+	@Override
+	public int getPosX() {
 		return this.posX;
 	}
 	
-	public int getPosY(){
+	@Override
+	public int getPosY() {
 		return this.posY;
 	}
+	
 	/**
 	 * Medoto per gestire l'aspetto dei Butt, vengono modificate dimensioni e colore
 	 */
-	private void setLookButt(){
+	private void setLookButt() {
 		this.setBackground(Color.gray);
-		this.setSize(Utility.hbutt, Utility.lbutt);
+		this.setSize(Utility.HBUTT, Utility.LBUTT);
 	}
 	
 }

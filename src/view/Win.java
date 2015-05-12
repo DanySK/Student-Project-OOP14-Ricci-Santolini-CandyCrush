@@ -1,19 +1,28 @@
 package view;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
 /**
- * 
+ * Classe che comunica all'utente che ha vinto la partita e gli permette di giocare nuovamente o di abbandonare il gioco.
  * 
  * @author Beatrice Ricci
  */
-public class Win extends AbstractFinal{
+public class Win extends AbstractFinal {
 
 	private static final long serialVersionUID = 5227740951252505323L;
 	
-	private ImageIcon iconWin = new ImageIcon("res"+ ViewUtility.SEP +"win.jpg");
-	private JLabel label = createLabel("  YOU WIN !!!  ", iconWin, JLabel.CENTER, JLabel.BOTTOM);
-	public Win(){
+	private final ImageIcon iconWin = new ImageIcon("res" + ViewUtility.SEP + "win.jpg");
+	private final JLabel label = createLabel("  YOU WIN !!!  ", iconWin, JLabel.CENTER, JLabel.BOTTOM);
+	/**
+	 * Costruttore.
+	 */
+	public Win() {
 		//title
 		this.setTitle("    WIN !!    ");
 		
@@ -21,7 +30,7 @@ public class Win extends AbstractFinal{
 		this.setDimension();
 		
 		// principal panel
-		JPanel panel = new JPanel(new BorderLayout());
+		final JPanel panel = new JPanel(new BorderLayout());
 		panel.add(label, BorderLayout.CENTER);
 		panel.add(setJButtonsInPanel(Color.cyan), BorderLayout.SOUTH);
 		

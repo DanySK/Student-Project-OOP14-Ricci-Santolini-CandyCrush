@@ -6,35 +6,117 @@ package controller;
  *
  */
 public final class Utility {
-	//dimensioni matrice di gioco
-	public static final int dim1 = 9;
-	public static final int dim2 = 9;
 	
-	//dimensioni delle icone
-	public static final int hbutt = 70;
-	public static final int lbutt = 60;
+	/**
+	 * Dimensione verticale della marice di gioco. 
+	 */
+	public static final int DIM1 = 9;
 	
-	//dati di gioco: mosse, obiettivi per i vari livelli di difficoltà
-	public final static int num_mosse = 30;
-	public final static int easy_ob = 5000;
-	public final static int medium_ob = 8000;
-	public final static int difficult_ob = 12000;
+	/**
+	 * Dimensione orizzontale della marice di gioco. 
+	 */
+	public static final int DIM2 = 9;
 	
-	//tipi caramelle
-	public final static int normal = 1;
-	public final static int stripedV = 2;
-	public final static int stripedO = 3;
-	public final static int wrapped = 4;
-	public final static int five = 5;
+	/**
+	 * Dimensione verticale del button.
+	 */
+	public static final int HBUTT = 70;
 	
-	//colori caramelle
-	public final static int blue = 0;
-	public final static int yellow = 1;
-	public final static int green = 2;
-	public final static int violet = 3;
-	public final static int orange = 4;
-	public final static int red = 5;
+	/**
+	 * Dimensione orizzontale del button.
+	 */
+	public static final int LBUTT = 60;
 	
-	//colore per la caramella speciale
-	public final static int special = 6;
+	/**
+	 * Numero di mosse.
+	 */
+	public static final int NUM_STEP = 30;
+	
+	/**
+	 * Punteggio obiettivo in EASY MODE.
+	 */
+	public static final int EASY_TARGET = 5000;
+	
+	/**
+	 * Punteggio obiettivo in MEDIUM MODE.
+	 */
+	public static final int MEDIUM_TARGET = 6500;
+	
+	/**
+	 * Punteggio obiettivo in DIFFICULT MODE.
+	 */
+	public static final int DIFFICULT_TARGET = 8000;
+	
+	/**
+	 * Codice del tipo caramella normale.
+	 */
+	public static final int NORMAL = 1;
+	
+	/**
+	 * Codice del tipo caramella striped vertical.
+	 */
+	public static final int STRIPED_V = 2;
+	
+	/**
+	 * Codice del tipo caramella striped horizontal.
+	 */
+	public static final int STRIPED_O = 3;
+	
+	/**
+	 * Codice del tipo caramella wrapped.
+	 */
+	public static final int WRAPPED = 4;
+	
+	/**
+	 * Codice del tipo caramella special.
+	 */
+	public static final int FIVE = 5;
+	
+	/**
+	 * codice del colore blu.
+	 */
+	public static final int BLUE = 0;
+
+	/**
+	 * codice del colore giallo.
+	 */
+	public static final int YELLOW = 1;
+
+	/**
+	 * codice del colore verde.
+	 */
+	public static final int GREEN = 2;
+
+	/**
+	 * codice del colore viola.
+	 */
+	public static final int VIOLET = 3;
+
+	/**
+	 * codice del colore arancio.
+	 */
+	public static final int ORANGE = 4;
+
+	/**
+	 * codice del colore rosso.
+	 */
+	public static final int RED = 5;
+	
+
+	/**
+	 * codice colore per la caramella special.
+	 */
+	public static final int SPECIAL = 6;
+	
+	/**
+	 * Punti bonus assegnati quando viene attivata una caramella special.
+	 */
+	public static final int BONUS_POINTS = 50;
+	
+	/**
+	 * Tempo da utilizzare per lo sleep.
+	 */
+	public static final int HALF_SECOND = 500;
+	
+	private Utility() { }
 }

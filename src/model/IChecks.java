@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Interfaccia per la gestione dei controlli delle combinazioni nella matrice di gioco
+ * Interfaccia per la gestione dei controlli delle combinazioni nella matrice di gioco.
  * 
  * @author Nicola Santolini
  *
@@ -9,7 +9,7 @@ package model;
 public interface IChecks {
 	
 	/**
-	 * Metodo che verifica se due caramelle sono adiacenti tramite le loro coordinate
+	 * Metodo che verifica se due caramelle sono adiacenti tramite le loro coordinate.
 	 * 
 	 * @param x1 indice di riga della prima caramella
 	 * @param y1 indice di colonna della prima caramelle
@@ -17,79 +17,79 @@ public interface IChecks {
 	 * @param y2 indice di colonna della seconda caramella
 	 * @return true se le due caramelle sono adiacenti
 	 */
-	public  boolean checkExchange(int x1, int y1, int x2, int y2);
+	boolean checkExchange(final int x1, final int y1, final int x2, final int y2);
 	
 	/**
-	 * Metodo che verifica la presenza di un tris verticale o orizzontale
+	 * Metodo che verifica la presenza di un tris verticale o orizzontale.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris
 	 */
-	public boolean checkTris(Element[][] mat);
+	boolean checkTris(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di tris verticali
+	 * Metodo che verifica la presenza di tris verticali.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris verticale
 	 */
-	public boolean checkTrisVertical(Element[][] mat);
+	boolean checkTrisVertical(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di tris orizzontali
+	 * Metodo che verifica la presenza di tris orizzontali.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris orizzontale
 	 */
-	public boolean checkTrisOrizontal(Element[][] mat);
+	boolean checkTrisHorizontal(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in verticale
+	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in verticale.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di quattro caramelle in verticale
 	 */
-	public boolean checkPokerVertical(Element[][] mat);
+	boolean checkPokerVertical(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in orizzontale
+	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in orizzontale.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di quattro caramelle in orizzontale
 	 */
-	public boolean checkPokerOrizontal(Element[][] mat);
+	boolean checkPokerHorizontal(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in verticale
+	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in verticale.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di cinque caramelle in verticale
 	 */
-	public boolean checkFiveOrizontal(Element[][] mat);
+	boolean checkFiveHorizontal(final Element[][] mat);
 	
 	/**
-	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in orizzontale
+	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in orizzontale.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di cinque caramelle in orizzontale
 	 */
-	public boolean checkFiveVertical(Element[][] mat);
+	boolean checkFiveVertical(final Element[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di due tris con una caramella
-	 * in comune
+	 * in comune.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di due tris con una
 	 * caramella in comune
 	 */
-	public boolean checkWrapped(Element mat[][]);
+	boolean checkWrapped(final Element[][] mat);
 	
 	/**
 	 * Metodo che verifica la possibilità, con una mossa, di generare almeno un tris con l'attuale matrice di gioco,
-	 * e quindi di poter continuare a giocare senza effetuare mescolamenti della matrice
-	 * @param mat
-	 * @return
+	 * e quindi di poter continuare a giocare senza effetuare mescolamenti della matrice.
+	 * @param mat matrice degli elementi
+	 * @return true se è possibile una nuova mossa
 	 */
-	public boolean checkNextMove(Element mat[][]);
+	boolean checkNextMove(final Element[][] mat);
 }
