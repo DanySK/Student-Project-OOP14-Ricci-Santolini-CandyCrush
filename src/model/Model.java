@@ -1,6 +1,6 @@
 package model;
 
-import controller.Utility;
+//import controller.Utility;
 
 /**
  * Classe che contiene il core della parte di model dell'applicazione, in 
@@ -11,46 +11,17 @@ import controller.Utility;
  */
 public class Model implements IModel {
 	
-	private Element[][] mat = new Element[Utility.DIM1][Utility.DIM2];
+	private final IGameLoop gameLoop;
 	
-	private int score;
 	private int target;
 	private int step;
+	private int score;
 	
-	private final IChecks checker;
-	private final TrisBehaviour trisController;
-	private final PokerBehaviour pokerController;
-	private final WrappedBehaviour wrappedController;
-	private final FiveBehaviour fiveController;
-		
 	/**
 	 * Costruttore.
 	 */
-	public Model() {
-		
-		for (int i = 0; i < Utility.DIM1; i++) {	
-			for (int j = 0; j < Utility.DIM2; j++) {
-				mat[i][j] = new Element(ModelUtilities.generate());
-			}
-		}
-		
-		this.checker = new Checks();
-		this.trisController = new TrisBehaviour();
-		this.pokerController = new PokerBehaviour();
-		this.wrappedController = new WrappedBehaviour();
-		this.fiveController = new FiveBehaviour();
-	}
-	
-	/**
-	 * Metodo che dopo la prima inizializzazione della matrice di gioco la controlla 
-	 * e rimescola finchè non si trova in una situazione corretta per iniziare a giocare: 
-	 * nessun tris già in posizione ma almeno uno realizzabile in una mossa.
-	 */
-	public void creation() {
-		
-		while (!checker.checkNextMove(this.mat) || checker.checkTris(this.mat)) {
-			ModelUtilities.shuffle(this.mat);
-		}
+	public Model() {	
+		this.gameLoop = new GameLoop();
 	}
 	
 	@Override
@@ -75,17 +46,17 @@ public class Model implements IModel {
 			
 	@Override
 	public int getColor(final int i, final int j) {
-		return this.mat[i][j].getColorNumber();
+		return this.getMat()[i][j].getColorNumber();
 	}	
 	
 	@Override
 	public int getTypeEl(final int i, final int j) {
-		return this.mat[i][j].getType();
+		return this.getMat()[i][j].getType();
 	}
 	
 	@Override
-	public Element[][] getMat() {
-		return this.mat;
+	public Candy[][] getMat() {
+		return gameLoop.getMat();
 	}
 	
 	@Override
@@ -116,61 +87,31 @@ public class Model implements IModel {
 	
 	@Override
 	public void doExchange(final int x1, final int y1, final int x2, final int y2) {
-		final Element app = new Element();
-
-		app.setColorNumber(mat[x1][y1].getColorNumber());
-		app.setType(mat[x1][y1].getType());
-		
-		mat[x1][y1].setColorNumber(mat[x2][y2].getColorNumber());
-		mat[x1][y1].setType(mat[x2][y2].getType());
-		
-		mat[x2][y2].setColorNumber(app.getColorNumber());
-		mat[x2][y2].setType(app.getType());
+		gameLoop.doExchange(x1, y1, x2, y2);
 	}
 		
 	@Override
 	public boolean goOn() {
-		return checker.checkTris(this.mat); 	
+		return gameLoop.checkTris(); 	
 	}
 	
 	@Override
 	public boolean checkNextMove() {
-		return checker.checkNextMove(this.mat);
+		return gameLoop.checkNextMove();
 	}
 	
 	@Override
 	public int doFive(final int c) {
-		return fiveController.doFive(this.mat, c);
+		return gameLoop.doFive(c);
 	}
 	
 	@Override
 	public void gameLoop() {
+		int points = gameLoop.gameLoop();
+		incScore(points);
 		
-		if (checker.checkFiveHorizontal(this.mat)) {
-			fiveController.doHorizontalFive(this.mat);
-			incScore(ModelUtilities.SPECIAL_POINTS);
-		} else if (checker.checkFiveVertical(this.mat)) {
-			fiveController.doVerticalFive(this.mat);
-			incScore(ModelUtilities.SPECIAL_POINTS);
-		} else if (checker.checkWrapped(this.mat)) {
-			wrappedController.controlWrapped(this.mat);
-			incScore(ModelUtilities.WRAPPED_POINTS);
-		} else if (checker.checkPokerVertical(this.mat)) {
-			pokerController.doVerticalPoker(this.mat);
-			incScore(ModelUtilities.STRIPED_POINTS);
-		} else if (checker.checkPokerHorizontal(this.mat)) {
-			pokerController.doHorizontalPoker(this.mat);
-			incScore(ModelUtilities.STRIPED_POINTS);
-		} else if (checker.checkTrisVertical(this.mat)) {
-			trisController.doVerticalTris(this.mat);
-			incScore(ModelUtilities.TRIS_POINTS);
-		} else if (checker.checkTrisHorizontal(this.mat)) {
-			trisController.doHorizontalTris(this.mat);
-			incScore(ModelUtilities.TRIS_POINTS);
-		}	
-		
-		while (!checker.checkNextMove(this.mat)) {
-			ModelUtilities.shuffle(this.mat);
+		while (!gameLoop.checkNextMove()) {
+			ModelUtilities.shuffle(gameLoop.getMat());
 		}
 		
 	}

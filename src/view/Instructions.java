@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import view.utility.ViewUtility;
 
 /**
  * Classe che mostra all'utente le istruzioni di gioco. Il testo delle istruzioni viene letto da un file 
@@ -26,7 +27,7 @@ import javax.swing.JTextArea;
  * @author Beatrice Ricci
  *
  */
-public class Instructions extends AbstractMenu implements Serializable {
+public class Instructions extends AbstractMenuPanelAndButton implements Serializable {
 
 	private static final long serialVersionUID = -6914523737504217168L;
 	private static final int DIMENSION_FONT_24 = 24;
@@ -41,6 +42,7 @@ public class Instructions extends AbstractMenu implements Serializable {
 	public Instructions() {
 		//title
 		this.setTitle(" instructions ");
+		
 		//dimensionDimension size;
 		final Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 		final int taglia = (int) size.getWidth() / 2;
@@ -48,11 +50,10 @@ public class Instructions extends AbstractMenu implements Serializable {
 		this.setResizable(false);
 		
 		final JPanel panel = new JPanel(new BorderLayout());
-		this.lookPanel(panel, Color.white);
+		this.lookPanel(panel);
 		
+		this.lookButton(ok);
 		panel.add(ok, BorderLayout.SOUTH);
-		this.ok.setFont(new Font(TYPE_FONT, Font.BOLD, DIMENSION_FONT_24));
-		this.lookButton(ok, Color.pink, true);
 		
 		this.ok.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
@@ -103,5 +104,19 @@ public class Instructions extends AbstractMenu implements Serializable {
 		} while (br.readLine() != null);
 		
 		br.close();
+	}
+	
+	@Override
+	public void lookPanel(final JPanel p) {
+		p.setOpaque(true);
+		p.setBackground(Color.WHITE);
+	}
+	
+	@Override
+	public void lookButton(final JButton b) {
+		b.setOpaque(true);
+		b.setBackground(Color.PINK);
+		b.setBorderPainted(true);
+		b.setFont(new Font(TYPE_FONT, Font.BOLD, DIMENSION_FONT_24));
 	}
 }

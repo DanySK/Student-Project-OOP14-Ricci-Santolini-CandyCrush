@@ -31,7 +31,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkTris(final Element[][] mat) {	
+	public boolean checkTris(final Candy[][] mat) {	
 		if (!checkTrisVertical(mat) && !checkTrisHorizontal(mat)) {
 			return false;
 		}
@@ -39,7 +39,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkTrisVertical(final Element[][] mat) {	
+	public boolean checkTrisVertical(final Candy[][] mat) {	
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 2; i++) {
 				if (mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()
@@ -52,7 +52,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkTrisHorizontal(final Element[][] mat) {
+	public boolean checkTrisHorizontal(final Candy[][] mat) {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 2; j++) {
 				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()
@@ -65,7 +65,15 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkPokerVertical(final Element[][] mat) {
+	public boolean checkPoker(final Candy[][] mat) {	
+		if (!checkPokerVertical(mat) && !checkPokerHorizontal(mat)) {
+			return false;
+		}
+		return true;	
+	}
+	
+	@Override
+	public boolean checkPokerVertical(final Candy[][] mat) {
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 3; i++) {
 				if (mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()
@@ -79,7 +87,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkPokerHorizontal(final Element[][] mat) {
+	public boolean checkPokerHorizontal(final Candy[][] mat) {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 3; j++) {
 				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()
@@ -93,7 +101,15 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkFiveHorizontal(final Element[][] mat) {
+	public boolean checkFive(final Candy[][] mat) {	
+		if (!checkFiveVertical(mat) && !checkFiveHorizontal(mat)) {
+			return false;
+		}
+		return true;	
+	}
+	
+	@Override
+	public boolean checkFiveHorizontal(final Candy[][] mat) {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 4; j++) {
 				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()
@@ -108,7 +124,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkFiveVertical(final Element[][] mat) {
+	public boolean checkFiveVertical(final Candy[][] mat) {
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 4; i++) {
 				if (mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()
@@ -123,7 +139,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkWrapped(final Element[][] mat) {
+	public boolean checkWrapped(final Candy[][] mat) {
 		for (int i = 0; i < Utility.DIM1 - 2; i++) {
 			for (int j = 0; j < Utility.DIM2 - 2; j++) {
 				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()
@@ -208,7 +224,7 @@ public class Checks implements IChecks {
 	}
 	
 	@Override
-	public boolean checkNextMove(final Element[][] mat) {
+	public boolean checkNextMove(final Candy[][] mat) {
 		return nextChecker.checkNextMove(mat);
 	}
 }

@@ -1,11 +1,11 @@
 package controller;
 
 import javax.swing.SwingUtilities;
-import view.GameOver;
-import view.PlayGameMenu;
-import view.Shuffle;
-import view.Update;
-import view.Win;
+import view.ending.GameOver;
+import view.play.GamePlayView;
+import view.play.Shuffle;
+import view.play.Update;
+import view.ending.Win;
 import model.Model;
 import model.ModelUtilities;
 /**
@@ -17,7 +17,7 @@ import model.ModelUtilities;
 public class Controller implements ViewObserver, IController {
 	
 	private final Model model;
-	private final PlayGameMenu view;
+	private final GamePlayView view;
 	private final Update up;
 	private final Listener observer;
 	
@@ -26,7 +26,7 @@ public class Controller implements ViewObserver, IController {
 	 * 
 	 * @param v schermata principale di gioco
 	 */
-	public Controller(final PlayGameMenu v) {
+	public Controller(final GamePlayView v) {
 		this.model = new Model();
 		this.view = v;
 		this.up = new Update(this, this.view);
@@ -34,7 +34,7 @@ public class Controller implements ViewObserver, IController {
 		this.observer = new Listener();
 		this.observer.addObserver(this);
 		
-		model.creation();
+		//model.creation();
 	}
 	
 	@Override

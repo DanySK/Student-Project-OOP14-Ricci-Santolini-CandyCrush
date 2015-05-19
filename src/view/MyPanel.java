@@ -9,7 +9,7 @@ import javax.swing.JPanel;
  * @author Beatrice Ricci
  *
  */
-public class MyPanel extends JPanel {
+public class MyPanel extends JPanel implements IMyPanel {
 	private static final long serialVersionUID = -4749088748024631646L;
 	
 	private final Image image;
@@ -23,10 +23,7 @@ public class MyPanel extends JPanel {
 		this.image = img;
 	}
 	
-	/**
-	 * Disegno l'immagine sul componente partendo dalle coordinate 0-0.
-	 * @param g componente su cui disegnare l'immagine
-	 */
+	@Override
 	public void paintComponent(final Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(this.image, 0, 0, this);

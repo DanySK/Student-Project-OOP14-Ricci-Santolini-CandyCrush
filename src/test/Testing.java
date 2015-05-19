@@ -3,7 +3,7 @@ package test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import model.Element;
+import model.Candy;
 import model.Checks;
 import model.NextMoveChecker;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import controller.Utility;
  */
 public class Testing {
 
-	private final Element[][] mat = new Element[Utility.DIM1][Utility.DIM2];
+	private final Candy[][] mat = new Candy[Utility.DIM1][Utility.DIM2];
 	private final Checks c = new Checks();
 	private final NextMoveChecker n = new NextMoveChecker();
 	
@@ -203,7 +203,7 @@ public class Testing {
 	private void generateMatrix() {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
-				mat[i][j] = new Element(i + j);
+				mat[i][j] = new Candy(i + j);
 			}
 		}
 	}

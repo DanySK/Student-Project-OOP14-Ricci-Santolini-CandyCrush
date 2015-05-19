@@ -9,14 +9,14 @@ import controller.Utility;
  * @author Nicola Santolini
  *
  */
-public class TrisBehaviour extends AbstractBehaviourController {
+public class TrisBehaviour extends AbstractLinearBehaviour {
 
 	/**
 	 * Metodo per la gestione di un tris in verticale.
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void doVerticalTris(final Element[][] mat) {
+	public void makeVertical(final Candy[][] mat) {
 			
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 2; i++) {
@@ -41,7 +41,7 @@ public class TrisBehaviour extends AbstractBehaviourController {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void doHorizontalTris(final Element[][] mat) {
+	public void makeHorizontal(final Candy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 2; j++) {

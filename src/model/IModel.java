@@ -13,7 +13,7 @@ public interface IModel {
 	 * 
 	 * @return la matrice di gioco
 	 */
-	Element[][] getMat();
+	Candy[][] getMat();
 	
 	/**
 	 * Metodo per decrementare le mosse rimanenti.
@@ -51,7 +51,6 @@ public interface IModel {
 	 */
 	int getColor(final int i, final int j);
 	
-
 	/**
 	 * Getter del tipo di un elemento della matrice di gioco date le sue coordinate.
 	 * 

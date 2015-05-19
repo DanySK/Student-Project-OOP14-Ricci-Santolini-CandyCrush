@@ -9,7 +9,7 @@ import controller.Utility;
  * @author Nicola Santolini
  *
  */
-public class FiveBehaviour extends AbstractBehaviourController {
+public class FiveBehaviour extends AbstractLinearBehaviour {
 
 	/**
 	 * Metodo che individua una combinazione di 5 elementi in orizzontale, posiziona
@@ -17,7 +17,7 @@ public class FiveBehaviour extends AbstractBehaviourController {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void doHorizontalFive(final Element[][] mat) {
+	public void makeHorizontal(final Candy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 4; j++) {
@@ -50,7 +50,7 @@ public class FiveBehaviour extends AbstractBehaviourController {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void doVerticalFive(final Element[][] mat) {
+	public void makeVertical(final Candy[][] mat) {
 
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 4; i++) {
@@ -87,7 +87,7 @@ public class FiveBehaviour extends AbstractBehaviourController {
 	 * @param mat matrice degli elementi
 	 * @return il numero di caramelle che sono state eliminate
 	 */
-	public int doFive(final Element[][] mat, final int color) {
+	public int doFive(final Candy[][] mat, final int color) {
 		int n = 0;
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {

@@ -2,7 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.Butt;
+import view.play.IButt;
 
 /**
  * Classe che osserva il comportamento della view.
@@ -28,13 +28,13 @@ public class Listener implements ActionListener {
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		
-		final Butt b = (Butt) e.getSource();
+		final IButt b = (IButt) e.getSource();
 		
 		if (lastX == -1 && lastY == -1) {
 			lastX = b.getPosX();
 			lastY = b.getPosY();
 			@SuppressWarnings("unused")
-			final Butt app = b;
+			final IButt app = b;
 		} else {
 			c.update(lastX,  lastY, b.getPosX(), b.getPosY());
 			lastX = -1;

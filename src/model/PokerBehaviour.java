@@ -9,14 +9,14 @@ import controller.Utility;
  * @author Nicola Santolini
  */
 
-public class PokerBehaviour extends AbstractBehaviourController {
+public class PokerBehaviour extends AbstractLinearBehaviour {
 
 	/**
 	* Metodo per la gestione di una combinazione da quattro in verticale.
 	* 
 	* @param mat matrice degli elementi
 	*/
-	public void doVerticalPoker(final Element[][] mat) {
+	public void makeVertical(final Candy[][] mat) {
 		
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 3; i++) {
@@ -43,7 +43,7 @@ public class PokerBehaviour extends AbstractBehaviourController {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void doHorizontalPoker(final Element[][] mat) {
+	public void makeHorizontal(final Candy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 3; j++) {

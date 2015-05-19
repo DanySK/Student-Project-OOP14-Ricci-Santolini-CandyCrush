@@ -103,8 +103,8 @@ public final class ModelUtilities {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public static void shuffle(final Element[][] mat) {
-		final List<Element> list = new ArrayList<>();
+	public static void shuffle(final Candy[][] mat) {
+		final List<Candy> list = new ArrayList<>();
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
@@ -112,7 +112,7 @@ public final class ModelUtilities {
 			}
 		}
 		Collections.shuffle(list);		
-		final Iterator<Element> it = list.iterator();
+		final Iterator<Candy> it = list.iterator();
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
@@ -121,8 +121,5 @@ public final class ModelUtilities {
 		}
 	}
 
-
-	
-	
 	private ModelUtilities() { }
 }

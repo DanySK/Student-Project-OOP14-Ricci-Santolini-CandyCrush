@@ -6,8 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import view.level.ChoiceLevelMenu;
+import view.utility.ViewUtility;
 
 /**
  * Classe che contiene il menù iniziale.
@@ -16,7 +20,7 @@ import javax.swing.JPanel;
  * @author Beatrice Ricci
  *
  */
-public class Menu extends AbstractMenu {
+public class Menu extends AbstractMenuButton {
 
 	private static final long serialVersionUID = -8627423879053598019L;
 	
@@ -41,23 +45,22 @@ public class Menu extends AbstractMenu {
 		this.setSize(dimension, dimension - ((int) size.getHeight() / HEIGHT_DIMENSION));
 		this.setResizable(false);
 		
-		//create principal panel
 		final JPanel panel = new MyPanel(ViewUtility.CARAMELLE);
 		panel.setLayout(new FlowLayout());
 		
 		this.start.setIcon(ViewUtility.IC_START);
-		this.lookButton(this.start, Color.PINK, false);
+		this.lookButton(this.start);
 		
 		this.instructions.setIcon(ViewUtility.IC_INSTR);
-		this.lookButton(this.instructions, Color.PINK, false);
+		this.lookButton(this.instructions);
 		
 		this.exit.setIcon(ViewUtility.IC_EXIT);
-		this.lookButton(this.exit, Color.PINK, false);
+		this.lookButton(this.exit);
 		
 		//add ActionListener to Buttons
 		this.start.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				new DifficultMenu();
+				new ChoiceLevelMenu();
 				closePage();
 			}
 		});
@@ -82,5 +85,12 @@ public class Menu extends AbstractMenu {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+	
+	@Override
+	public void lookButton(final JButton b) {
+		b.setOpaque(true);
+		b.setBackground(Color.PINK);
+		b.setBorderPainted(false);
 	}
 }
