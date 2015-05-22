@@ -19,7 +19,7 @@ public abstract class AbstractMenu extends JFrame implements IMenu {
 	
 	@Override
 	public final void closeGame() {
-		System.exit(0);
+		Runtime.getRuntime().exit(0);
 	}
 	
 	@Override

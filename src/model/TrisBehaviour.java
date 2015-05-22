@@ -16,6 +16,7 @@ public class TrisBehaviour extends AbstractLinearBehaviour {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
+	@Override
 	public void makeVertical(final Candy[][] mat) {
 			
 		for (int j = 0; j < Utility.DIM2; j++) {
@@ -41,6 +42,7 @@ public class TrisBehaviour extends AbstractLinearBehaviour {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
+	@Override
 	public void makeHorizontal(final Candy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {

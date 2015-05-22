@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import view.utility.ViewUtility;
-
 
 /**
  * Classe che comunica all'utente che ha vinto la partita e gli permette di giocare nuovamente o di abbandonare il gioco.
@@ -21,8 +19,7 @@ public class Win extends AbstractFinal {
 
 	private static final long serialVersionUID = 5227740951252505323L;
 	
-	private final ImageIcon iconWin = new ImageIcon("res" + ViewUtility.SEP + "win.jpg");
-	private final JLabel label = createLabel("  YOU WIN !!!  ", iconWin, JLabel.CENTER, JLabel.BOTTOM);
+	private final JLabel label = createLabel("  YOU WIN !!!  ", ViewUtility.ICON_WIN, JLabel.CENTER, JLabel.BOTTOM);
 	/**
 	 * Costruttore.
 	 */
@@ -41,7 +38,7 @@ public class Win extends AbstractFinal {
 		
 		this.getContentPane().add(panel);
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

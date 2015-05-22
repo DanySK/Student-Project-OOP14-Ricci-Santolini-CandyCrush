@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 
 import view.AbstractMenuButton;
 import view.MyPanel;
-import view.play.GamePlayView;
-import view.play.IGamePlay;
 import view.utility.ViewUtility;
 /**
  * Classe che disegna il menù in cui l'utente può scegliere il livello di difficoltà.
@@ -67,22 +65,19 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 		//actions
 		this.rb1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				final IGamePlay play = new GamePlayView();
-				new EasyLevel().setLevel(play);
+				new EasyLevel().setLevel();
 				closePage();
 			}
 		});
 		this.rb2.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				final IGamePlay play = new GamePlayView();
-				new MediumLevel().setLevel(play);
+				new MediumLevel().setLevel();
 				closePage();
 			}
 		});
 		this.rb3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				final IGamePlay play = new GamePlayView();
-				new DifficultLevel().setLevel(play);
+				new DifficultLevel().setLevel();
 				closePage();
 			}
 		});

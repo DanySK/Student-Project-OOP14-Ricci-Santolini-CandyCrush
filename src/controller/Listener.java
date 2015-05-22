@@ -36,7 +36,7 @@ public class Listener implements ActionListener {
 			@SuppressWarnings("unused")
 			final IButt app = b;
 		} else {
-			c.update(lastX,  lastY, b.getPosX(), b.getPosY());
+			c.makeMove(lastX,  lastY, b.getPosX(), b.getPosY());
 			lastX = -1;
 			lastY = -1;
 		}	

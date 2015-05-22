@@ -1,49 +1,25 @@
 This game is very easy! 
-
 If you want to win a match you just have to reach the score you see on the 
-
-screen before your moves drop to 0!\n
-
+screen before your moves drop to 0!
 If you play in EASY mode you'll have no problems but if you choose the
-
 DIFFICULT mode it will be very hard!
-
 To make points and win the game you just have to exchange CANDIES on 
-
 the screen  to make combinations of 3, 4 or 5 CANDIES of the same COLOR.
-
 To make an exchange you just have to click on a CANDY and click again on 
-
 another CANDY next to her. 
-
 You can't exchange two candies if they're not side by side and you can't make 
-
 diagonal moves.
-
 When you make a move you must form at least a combination of 3 CANDIES of 
-
 the same color or they will come back in their previous position!
-
 If you make a combination of 3 CANDIES of the same color they will disappear 
-
 and give you points!
-
 A combination of 4 CANDIES will make a STRIPED CANDY that could destroy 
-
 an entire row or column.
-
 A combination of 2 tris will make a WRAPPED CANDY that could destroy 
-
 all the other candies  around her.
-
 A combination of 5 CANDIES will make a SPECIAL CANDY...
-
 she has a big surprise for you!
-
 When your points are more than the required score YOU WIN!!
-
 If your moves drop to 0 and you haven't enough points, YOU LOSE!
-
 Now you know everything's necessary to enjoy the game!
-
 Let's go!

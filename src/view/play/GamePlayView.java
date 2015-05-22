@@ -12,7 +12,7 @@ import controller.Controller;
 import controller.Utility;
 
 /**
- * Classe che disegna la schermata principale del gioco con la matrice di caramelle, label con i punti, le mosse e l'target
+ * Classe che disegna la schermata principale del gioco con la matrice di caramelle, label con i punti, le mosse e l'obiettivo
  * che devono aggiornarsi ad ogni mossa.
  * 
  * @author Beatrice Ricci
@@ -28,28 +28,38 @@ public class GamePlayView extends AbstractMenu implements IGamePlay {
 	
 	private final Butt[][] matrix = new Butt[Utility.DIM1][Utility.DIM2];
 	private final Controller c = new Controller(this);
-		
+	private final Update up = new Update(this);
+	
+	private int initialTarget;
+	private int initialMoves;
+	
 	private final JLabel step = new JLabel(" ");
 	private final JLabel tot = new JLabel(" 0 punti"); 
 	private final JLabel target = new JLabel(" ");
 	private final JLabel level = new JLabel(" ");
 	
+	private final JPanel panel = new JPanel();
 	/**
 	 * Costruttore della classe contenente la schermata principale di gioco.
+	 * @param iMoves mosse del livello
+	 * @param iTarget obiettivo del livello
 	 */
-	public GamePlayView() {
+	public GamePlayView(final int iMoves, final int iTarget) {
 		
 		this.setSize(Utility.DIM1 * Utility.HBUTT + WIDTH_DIMENSION, Utility.DIM1 * Utility.LBUTT + HEIGHT_DIMENSION);
 		this.setResizable(false);
 		
-		JPanel panel = new JPanel();
-		panel = new JPanel(new BorderLayout());
+		this.initialTarget = iTarget;
+		this.initialMoves = iMoves;
+		
+		this.c.setInitialConditions(this.initialMoves, this.initialTarget);
+		
+		this.panel.setLayout(new BorderLayout());
 		
 		this.matrixPanel = new JPanel(new GridLayout(Utility.DIM1, Utility.DIM2));
 		this.matrixPanel.setSize(Utility.DIM1 * Utility.HBUTT, Utility.DIM2 * Utility.LBUTT);
 		
 		new SetPlayPanels().updatePanel(panel, this.matrixPanel, this.level, this.step, this.target, this.tot);
-		this.updateStep(c.getModelStep());
 		this.drawFirstMatrix();
 		this.getContentPane().add(panel);
 		
@@ -65,7 +75,6 @@ public class GamePlayView extends AbstractMenu implements IGamePlay {
 	private void drawFirstMatrix() {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
-				
 				matrix[i][j] = new Butt(i, j);
 				if (this.c.getModelNum(i, j) == Utility.BLUE) {
 					matrix[i][j].setIcon(IconUtility.BLUEIC);
@@ -81,31 +90,39 @@ public class GamePlayView extends AbstractMenu implements IGamePlay {
 					matrix[i][j].setIcon(IconUtility.REDIC);
 				}
 				matrix[i][j].addActionListener(c.getObserver());
-				matrixPanel.add(matrix[i][j]);	
+				matrixPanel.add(matrix[i][j]);
 			}
 		}
 	}
 	
 	@Override
+	public void draw(final int color, final int type, final int i, final int j) {
+		up.draw(color, type, i, j);
+	}
+	
+	@Override
+	public void update(final int moves, final int score) {
+		this.up.updateScoreAndMoves(moves, score);
+	}
+	
+	@Override
 	public void updateTarget(final int n) {
-		this.target.setText("target: " + n + " p");
-		this.c.setModelTarget(n);
+		this.target.setText(" target: " + n + " p ");
 	}
 	
 	@Override
 	public void setDiff(final String s) {
-		this.level.setText(s + " LEVEL");
+		this.level.setText(" " + s + " LEVEL ");
 	}
 	
 	@Override
-	public void updateStep(final int n) {
+	public void updateMoves(final int n) {
 		this.step.setText("  " + n + "  ");
-		this.c.setModelStep(n);
 	}
 	
 	@Override
-	public void updateTot() {
-		this.tot.setText(" " + c.getModelTot() + " punti");
+	public void updateScore(final int n) {
+		this.tot.setText(" " + n + " punti ");
 	}
 	
 	@Override

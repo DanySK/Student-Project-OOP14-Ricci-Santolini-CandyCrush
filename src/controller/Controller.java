@@ -1,24 +1,24 @@
 package controller;
 
 import javax.swing.SwingUtilities;
+
 import view.ending.GameOver;
-import view.play.GamePlayView;
+import view.play.IGamePlay;
 import view.play.Shuffle;
-import view.play.Update;
 import view.ending.Win;
+import model.IModel;
 import model.Model;
-import model.ModelUtilities;
+
 /**
  * Classe che contiene il Controller dell'applicazione, che fa quindi da intermediario fra model e view come da pattern MVC.
  * 
  * @author Beatrice Ricci, Nicola Santolini
  *
  */
-public class Controller implements ViewObserver, IController {
+public class Controller implements IController {
 	
-	private final Model model;
-	private final GamePlayView view;
-	private final Update up;
+	private final IModel model;
+	private final IGamePlay view;
 	private final Listener observer;
 	
 	/**
@@ -26,16 +26,13 @@ public class Controller implements ViewObserver, IController {
 	 * 
 	 * @param v schermata principale di gioco
 	 */
-	public Controller(final GamePlayView v) {
+	public Controller(final IGamePlay v) {
 		this.model = new Model();
 		this.view = v;
-		this.up = new Update(this, this.view);
-		
 		this.observer = new Listener();
 		this.observer.addObserver(this);
-		
-		//model.creation();
 	}
+	
 	
 	@Override
 	public int getModelNum(final int i, final int j) {
@@ -48,23 +45,19 @@ public class Controller implements ViewObserver, IController {
 	}
 	
 	@Override
-	public int getModelStep() {
-		return model.getStep();
+	public int getModelMoves() {
+		return model.getMoves();
 	}
 	
 	@Override
-	public int getModelTot() {
+	public int getModelScore() {
 		return model.getScore();
 	}
 	
 	@Override
-	public void setModelStep(final int t) {
-		model.setStep(t);
-	}
-	
-	@Override
-	public void setModelTarget(final int t) {
-		model.setTarget(t);
+	public void setInitialConditions(final int moves, final int targetScore) {
+		model.setMoves(moves);
+		model.setTarget(targetScore);
 	}
 	
 	@Override
@@ -73,89 +66,95 @@ public class Controller implements ViewObserver, IController {
 	}
 	
 	@Override
-	public void update(final int x1, final int y1, final int x2, final int y2) {
+	public void makeMove(final int x1, final int y1, final int x2, final int y2) {
 		if (model.checkExchange(x1, y1, x2, y2)) {
 			model.doExchange(x1, y1, x2, y2);
-			up.updateView();
-			//CARAMELLA DA 5
-			if (model.getMat()[x1][y1].getType() == Utility.FIVE
-				|| model.getMat()[x2][y2].getType() == Utility.FIVE) {
+			drawUpadates();
+			view.update(this.model.getMoves(), this.model.getScore());
+			//attivata una caramella special 
+			if (model.isUsingSpecial(x1, y1, x2, y2)) {
 				
-				if (model.getMat()[x1][y1].getType() == Utility.FIVE) {
-					model.getMat()[x1][y1].setColorNumber(ModelUtilities.generate());
-					model.getMat()[x1][y1].setType(Utility.NORMAL);
-					final int n = model.doFive(model.getMat()[x2][y2].getColorNumber());
-					model.incScore(n * Utility.BONUS_POINTS);
-				}
-				if (model.getMat()[x2][y2].getType() == Utility.FIVE) {
-					model.getMat()[x2][y2].setColorNumber(ModelUtilities.generate());
-					model.getMat()[x2][y2].setType(Utility.NORMAL);
-					final int n = model.doFive(model.getMat()[x1][y1].getColorNumber());
-					model.incScore(n * Utility.BONUS_POINTS);
-				}
+				model.makeSpecial(x1, y1, x2, y2);
+				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							Thread.sleep(Utility.HALF_SECOND);
+							Thread.sleep(Utility.TIME);
 						} catch (InterruptedException e) {
 							System.out.println(e);	
 						}
-						up.updateView();
+						drawUpadates();
+						view.update(model.getMoves(), model.getScore());
 						finalControl();
 					}
 				});
 			}
-			//HAI FATTO TRIS -> DO
+			//hai fatto tris -> do exchange
 			if (model.goOn()) {
-				//NON HAI FATTO TRIS -> UNDO
-				model.decStep();
+				model.decMoves();
 				SwingUtilities.invokeLater(new Runnable() {		
 					public void run() {	
 						while (model.goOn()) {
 							try {
-								Thread.sleep(Utility.HALF_SECOND);
+								Thread.sleep(Utility.TIME);
 							} catch (InterruptedException e) {
 								System.out.println(e);
 							}		
-							model.gameLoop();	
-							up.updateView();					
+							model.gameLoop();
+							drawUpadates();
+							view.update(model.getMoves(), model.getScore());			
 						}
 						finalControl();
 						while (!model.checkNextMove()) {
-							ModelUtilities.shuffle(model.getMat());
+							model.shuffle();
 							new Shuffle().goShuffle();
 						}
 					}
 				});
-			
 			} else { 
+				//non hai fatto tris -> undo exchange
 				SwingUtilities.invokeLater(new Runnable() {	
 					public void run() {
 						try {
-							Thread.sleep(Utility.HALF_SECOND);
+							Thread.sleep(Utility.TIME);
 						} catch (InterruptedException e) {
 							System.out.println(e);
 						}
 						model.doExchange(x1, y1, x2, y2);
-						up.updateView();	
+						drawUpadates();
+						view.update(model.getMoves(), model.getScore());
 					}
 				});
 				
 			}
-			up.updateView();
+			view.update(this.model.getMoves(), this.model.getScore());
 		}
 	}
-	
+	/**
+	 * Metodo che controlla se il gioco è finito o meno.
+	 */
 	private void finalControl() {
-		//CONTROLLI VITTORIA/SCONFITTA
-		if (this.model.getStep() == 0 && this.model.getScore() >= this.model.getTarget() 
-				|| this.model.getScore() >= this.model.getTarget()) {
+		//controllo vittoria: se viene raggiunto l'obiettivo (anche all'ultima mossa)
+		if (this.model.getMoves() >= 0 && this.model.getScore() >= this.model.getTarget()) {
 			this.view.closePage();
 			new Win();
 		}
-		if (this.model.getStep() == 0 && this.model.getScore() < this.model.getTarget()) {
+		//controllo sconfitta: se al termine delle mosse il punteggio è minore dell'obiettivo richiesto 
+		if (this.model.getMoves() == 0 && this.model.getScore() < this.model.getTarget()) {
 			this.view.closePage();
 			new GameOver();
+		}
+	}
+	
+	/**
+	 * Metodo che fornisce alla view i dati per disegnare la matrice aggiornata. 
+	 * La view a sua volta li passerà alla classe Update.
+	 */
+	private void drawUpadates() {
+		for (int i = 0; i < Utility.DIM1; i++) {
+			for (int j = 0; j < Utility.DIM2; j++) {
+				this.view.draw(this.model.getColor(i, j), this.model.getTypeEl(i, j), i, j);
+			}
 		}
 	}
 }

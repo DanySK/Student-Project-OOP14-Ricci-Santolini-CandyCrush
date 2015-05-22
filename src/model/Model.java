@@ -1,5 +1,8 @@
 package model;
 
+
+import controller.Utility;
+
 //import controller.Utility;
 
 /**
@@ -11,22 +14,22 @@ package model;
  */
 public class Model implements IModel {
 	
-	private final IGameLoop gameLoop;
+	private final IBoard board;
 	
 	private int target;
-	private int step;
+	private int moves;
 	private int score;
 	
 	/**
 	 * Costruttore.
 	 */
 	public Model() {	
-		this.gameLoop = new GameLoop();
+		this.board = new Board();
 	}
 	
 	@Override
-	public void decStep() {
-		this.step--;
+	public void decMoves() {
+		this.moves--;
 	}
 	
 	@Override
@@ -35,8 +38,8 @@ public class Model implements IModel {
 	}
 	
 	@Override
-	public int getStep() {
-		return this.step;
+	public int getMoves() {
+		return this.moves;
 	}
 		
 	@Override
@@ -46,22 +49,17 @@ public class Model implements IModel {
 			
 	@Override
 	public int getColor(final int i, final int j) {
-		return this.getMat()[i][j].getColorNumber();
+		return board.getColor(i, j);
 	}	
 	
 	@Override
 	public int getTypeEl(final int i, final int j) {
-		return this.getMat()[i][j].getType();
+		return board.getTypeEl(i, j);
 	}
 	
 	@Override
-	public Candy[][] getMat() {
-		return gameLoop.getMat();
-	}
-	
-	@Override
-	public void setStep(final int num) {
-		this.step = num;
+	public void setMoves(final int num) {
+		this.moves = num;
 	}
 	
 	@Override
@@ -87,32 +85,60 @@ public class Model implements IModel {
 	
 	@Override
 	public void doExchange(final int x1, final int y1, final int x2, final int y2) {
-		gameLoop.doExchange(x1, y1, x2, y2);
+		board.doExchange(x1, y1, x2, y2);
 	}
 		
 	@Override
 	public boolean goOn() {
-		return gameLoop.checkTris(); 	
+		return board.checkTris(); 	
 	}
 	
 	@Override
 	public boolean checkNextMove() {
-		return gameLoop.checkNextMove();
-	}
-	
-	@Override
-	public int doFive(final int c) {
-		return gameLoop.doFive(c);
+		return board.checkNextMove();
 	}
 	
 	@Override
 	public void gameLoop() {
-		int points = gameLoop.gameLoop();
-		incScore(points);
+		incScore(board.gameLoop());
 		
-		while (!gameLoop.checkNextMove()) {
-			ModelUtilities.shuffle(gameLoop.getMat());
+		while (!board.checkNextMove()) {
+			board.shuffle();
+		}
+	}
+	
+	@Override
+	public void shuffle() {
+		board.shuffle();
+	}
+	
+	@Override
+	public boolean isUsingSpecial(final int x1, final int y1, final int x2, final int y2) {
+		
+		if (board.getTypeEl(x1, y1) == Utility.FIVE
+				|| board.getTypeEl(x2, y2) == Utility.FIVE) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public void makeSpecial(final int x1, final int y1, final int x2, final int y2) {
+		
+		if (board.getTypeEl(x1, y1) == Utility.FIVE) {
+			board.setColor(x1, y1, ModelUtilities.generate());
+			board.setType(x1, y1, Utility.NORMAL);
+			/*salvo in una variabile il numero di caramelle dello stesso colore di quella che è stata accoppiata,
+			che viene ritornato dal metodo doFive(), e per ognuna attribuisco punti bonus*/
+			final int n = board.doFive(board.getColor(x2, y2));
+			this.incScore(n * Utility.BONUS_POINTS);
+		}
+		if (board.getTypeEl(x2, y2) == Utility.FIVE) {
+			board.setColor(x2, y2, ModelUtilities.generate());
+			board.setType(x2, y2, Utility.NORMAL);
+			final int n = board.doFive(board.getColor(x1, y1));
+			this.incScore(n * Utility.BONUS_POINTS);
 		}
 		
-	}
+	}	
 }

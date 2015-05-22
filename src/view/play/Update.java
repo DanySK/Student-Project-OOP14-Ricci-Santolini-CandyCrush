@@ -1,7 +1,6 @@
 package view.play;
 
 import view.utility.IconUtility;
-import controller.Controller;
 import controller.Utility;
 
 /**
@@ -13,94 +12,82 @@ import controller.Utility;
  *
  */
 public class Update implements IUpdate {
-	private final Controller c;
 	private final GamePlayView pgm;
 	
 	/**
 	 * Costruttore con passaggio di parametri.
-	 * @param controller controller che dice alla classe come aggiornare la schermata di gioco
 	 * @param play schermata di gioco
 	 */
-	public Update(final Controller controller, final GamePlayView play) {
-		this.c = controller;
+	public Update(final GamePlayView play) {
 		this.pgm = play;
 	}
 	
 	@Override
-	public void updateView() {
-			
-		for (int i = 0; i < Utility.DIM1; i++) {
-			for (int j = 0; j < Utility.DIM2; j++) {
-
-				if (this.c.getModelType(i, j) == Utility.NORMAL) {
-					if (this.c.getModelNum(i, j) == Utility.BLUE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEIC);
-					} else if (this.c.getModelNum(i, j) == Utility.YELLOW) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWIC);
-					} else if (this.c.getModelNum(i, j) == Utility.GREEN) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENIC);
-					} else if (this.c.getModelNum(i, j) == Utility.VIOLET) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETIC);
-					} else if (this.c.getModelNum(i, j) == Utility.ORANGE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGEIC);
-					} else if (this.c.getModelNum(i, j) == Utility.RED) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDIC);
-					}
-				} else if (this.c.getModelType(i, j) == Utility.STRIPED_V) {
-					if (this.c.getModelNum(i, j) == Utility.BLUE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEVIC);
-					} else if (this.c.getModelNum(i, j) == Utility.YELLOW) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWSVIC);
-					} else if (this.c.getModelNum(i, j) == Utility.GREEN) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENSVIC);
-					} else if (this.c.getModelNum(i, j) == Utility.VIOLET) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETSVIC);
-					} else if (this.c.getModelNum(i, j) == Utility.ORANGE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGESVIC);
-					} else if (this.c.getModelNum(i, j) == Utility.RED) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDSVIC);
-					}
-				} else if (this.c.getModelType(i, j) == Utility.STRIPED_O) {
-					if (this.c.getModelNum(i, j) ==  Utility.BLUE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUESOIC);
-					} else if (this.c.getModelNum(i, j) ==  Utility.YELLOW) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWSOIC);
-					} else if (this.c.getModelNum(i, j) ==  Utility.GREEN) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENSOIC);
-					} else if (this.c.getModelNum(i, j) ==  Utility.VIOLET) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETSOIC);
-					} else if (this.c.getModelNum(i, j) ==  Utility.ORANGE) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGESOIC);
-					} else if (this.c.getModelNum(i, j) ==  Utility.RED) {
-						this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDSOIC);
-					}
-				} else if (this.c.getModelType(i, j) == Utility.WRAPPED) {
-						if (this.c.getModelNum(i, j) == Utility.BLUE) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEWIC);
-						} else if (this.c.getModelNum(i, j) == Utility.YELLOW) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWWIC);
-						} else if (this.c.getModelNum(i, j) == Utility.GREEN) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENWIC);
-						} else if (this.c.getModelNum(i, j) == Utility.VIOLET) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETWIC);
-						} else if (this.c.getModelNum(i, j) == Utility.ORANGE) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGEWIC);
-						} else if (this.c.getModelNum(i, j) == Utility.RED) {
-							this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDWIC);
-						}
-				} else if (this.c.getModelType(i, j) == Utility.FIVE) {
-					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.FIVEIC);
+	public void draw(final int color, final int type, final int i, final int j) {
+		if (type == Utility.NORMAL) {
+			if (color == Utility.BLUE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEIC);
+			} else if (color == Utility.YELLOW) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWIC);
+			} else if (color == Utility.GREEN) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENIC);
+			} else if (color == Utility.VIOLET) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETIC);
+			} else if (color == Utility.ORANGE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGEIC);
+			} else if (color == Utility.RED) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDIC);
+			}
+		} else if (type == Utility.STRIPED_V) {
+			if (color == Utility.BLUE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEVIC);
+			} else if (color == Utility.YELLOW) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWSVIC);
+			} else if (color == Utility.GREEN) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENSVIC);
+			} else if (color == Utility.VIOLET) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETSVIC);
+			} else if (color == Utility.ORANGE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGESVIC);
+			} else if (color == Utility.RED) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDSVIC);
+			}
+		} else if (type == Utility.STRIPED_O) {
+			if (color ==  Utility.BLUE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUESOIC);
+			} else if (color ==  Utility.YELLOW) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWSOIC);
+			} else if (color ==  Utility.GREEN) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENSOIC);
+			} else if (color ==  Utility.VIOLET) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETSOIC);
+			} else if (color ==  Utility.ORANGE) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGESOIC);
+			} else if (color ==  Utility.RED) {
+				this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDSOIC);
+			}
+		} else if (type == Utility.WRAPPED) {
+				if (color == Utility.BLUE) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.BLUEWIC);
+				} else if (color == Utility.YELLOW) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.YELLOWWIC);
+				} else if (color == Utility.GREEN) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.GREENWIC);
+				} else if (color == Utility.VIOLET) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.VIOLETWIC);
+				} else if (color == Utility.ORANGE) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.ORANGEWIC);
+				} else if (color == Utility.RED) {
+					this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.REDWIC);
 				}
-				this.updateLabel();
-			}		
+		} else if (type == Utility.FIVE) {
+			this.pgm.getAMatrixButt(i, j).setIcon(IconUtility.FIVEIC);
 		}
 	}
 	
-	/**
-	 * Metodo per aggiornare il totale delle mosse e del punteggio ottenuto
-	 */
-	private void updateLabel() {
-		this.pgm.updateStep(this.c.getModelStep());
-		this.pgm.updateTot();
+	@Override
+	public void updateScoreAndMoves(final int moves, final int score) {
+		this.pgm.updateScore(score);
+		this.pgm.updateMoves(moves);
 	}
 }

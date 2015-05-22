@@ -2,8 +2,7 @@ package model;
 
 /**
  * 
- * Interfaccia che modella a livello di modello un singolo elemento della 
- * matrice di gioco.
+ * Interfaccia che modella una caramella, un singolo elemento della matrice di gioco.
  * 
  * @author Nicola Santolini
  *

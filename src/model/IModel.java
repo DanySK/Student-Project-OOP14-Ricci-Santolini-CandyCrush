@@ -9,16 +9,9 @@ package model;
 public interface IModel {
 	
 	/**
-	 * Getter della matrice di gioco.
-	 * 
-	 * @return la matrice di gioco
-	 */
-	Candy[][] getMat();
-	
-	/**
 	 * Metodo per decrementare le mosse rimanenti.
 	 */
-	void decStep();
+	void decMoves();
 	
 	/**
 	 * Getter del punteggio corrente.
@@ -32,7 +25,7 @@ public interface IModel {
 	 * 
 	 * @return il numero di mosse rimanenti
 	 */
-	int getStep();
+	int getMoves();
 	
 	/**
 	 * Getter dell'obiettivo di punti da raggiungere.
@@ -65,7 +58,7 @@ public interface IModel {
 	 * 
 	 * @param num punteggio da settare
 	 */
-	void setStep(final int num);
+	void setMoves(final int num);
 	
 	/**
 	 * Metodo che incrementa il punteggio.
@@ -123,18 +116,36 @@ public interface IModel {
 	boolean checkNextMove();
 	
 	/**
-	 * Metodo che modella il comportamento da utilizzare quando si attiva una caramella SPECIAL.
-	 * 
-	 * @param c colore della caramella con cui è stata abbinata la SPECIAL
-	 * @return il numero di caramelle dello stesso colore di quella passata come parametro,
-	 * per calcore i punti bonus da attribuire
-	 */
-	int doFive(final int c);
-	
-	/**
 	 * Metodo invocato finchè sulla matrice esiste almeno un combinazione, verifica di quale 
 	 * tipo di combinazione si tratta e attiva il behaviour corrispondente, finchè la matrice non 
 	 * viene a trovarsi in una situazione senza combinazioni in atto.
 	 */
 	void gameLoop();
+	
+	/**
+	 * Metodo che esegue controlla se si sta facend una mossa che coinvolge una caramella SPECIAL, il cui behaviour
+	 * deve essere in ogni caso attivato, indipendentemente dal fatto che la mossa generi una combinazione o meno.
+	 * 
+	 * @param x1 indice di riga della prima coordinata
+	 * @param y1 indice di colonna della prima coordinata
+	 * @param x2 indice di riga della seconda coordinata
+	 * @param y2 indice di colonna della seconda coordinata
+	 * @return true se si sta attivando una caramella SPECIAL
+	 */
+	boolean isUsingSpecial(final int x1, final int y1, final int x2, final int y2);
+	
+	/**
+	 * Metodo da invocare qualora isUsingSpecial sia vero, che attiva il behaviour speciale della caramella SPECIAL.
+	 * 
+	 * @param x1 indice di riga della prima coordinata
+	 * @param y1 indice di colonna della prima coordinata
+	 * @param x2 indice di riga della seconda coordinata
+	 * @param y2 indice di colonna della seconda coordinata
+	*/
+	void makeSpecial(final int x1, final int y1, final int x2, final int y2);
+	
+	/**
+	 * Metodo che invoca la funzionalità di shuffle della matrice di gioco.
+	 */
+	void shuffle();
 }

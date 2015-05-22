@@ -116,7 +116,7 @@ public final class Utility {
 	/**
 	 * Tempo da utilizzare per lo sleep.
 	 */
-	public static final int HALF_SECOND = 500;
+	public static final int TIME = 300;
 	
 	private Utility() { }
 }

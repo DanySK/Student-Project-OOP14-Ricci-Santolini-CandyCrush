@@ -106,11 +106,14 @@ public final class ModelUtilities {
 	public static void shuffle(final Candy[][] mat) {
 		final List<Candy> list = new ArrayList<>();
 		
+		/*Si inseriscono gli elementi della matrice attuale in una lista*/
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
 				list.add(mat[i][j]);
 			}
 		}
+		/*Si mescola la lista e poi, utilizzando un iteratore, si reinseriscono
+		 * gli elementi mischiati nella matrice*/
 		Collections.shuffle(list);		
 		final Iterator<Candy> it = list.iterator();
 		

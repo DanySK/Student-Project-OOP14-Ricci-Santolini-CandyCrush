@@ -8,8 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 
@@ -96,13 +96,14 @@ public class Instructions extends AbstractMenuPanelAndButton implements Serializ
 	 * @throws ClassNotFoundException
 	 */
 	private void readTheInstruction() throws IOException, ClassNotFoundException {
-		final BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(ViewUtility.FILE_PATH)));
+		final InputStream in = Instructions.class.getResourceAsStream(ViewUtility.FILE_PATH);
+		final BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		
-		do {
-			this.area.append(br.readLine().toString());
+		String app = "a";
+		while ((app = br.readLine()) != null) {
+			this.area.append(app);
 			this.area.append("\n");
-		} while (br.readLine() != null);
-		
+		} 
 		br.close();
 	}
 	

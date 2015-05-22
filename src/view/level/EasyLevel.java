@@ -1,6 +1,7 @@
 package view.level;
 
 import controller.Utility;
+import view.play.GamePlayView;
 import view.play.IGamePlay;
 
 /**
@@ -11,16 +12,17 @@ import view.play.IGamePlay;
 public class EasyLevel extends AbstractLevel {
 	
 	@Override
-	public void setLevel(final IGamePlay play) {
-		setFeatures(play);
+	public void setLevel() {
+		setFeatures();
 	}
 	
 	/**
 	 * Metodo per settare le caratteristiche del livello di difficoltà.
 	 * @param play schermata di gioco da impostare
 	 */
-	private void setFeatures(final IGamePlay play) {
-		play.updateStep(Utility.NUM_STEP);
+	private void setFeatures() {
+		IGamePlay play = new GamePlayView(Utility.NUM_STEP, Utility.EASY_TARGET);
+		play.updateMoves(Utility.NUM_STEP);
 		play.updateTarget(Utility.EASY_TARGET);
 		play.setDiff("EASY");
 	}

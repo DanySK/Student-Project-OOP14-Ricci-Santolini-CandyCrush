@@ -41,16 +41,15 @@ public class NextMoveChecker {
 		//scorro partendo da 0,0
 		for (int i = 0; i < Utility.DIM1 - 1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 2; j++) {
-				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 1][j + 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 1][j + 2].getColorNumber())) {
 						return true;
 					}
-				}
-				if (mat[i][j].getColorNumber() == mat[i + 1][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i][j + 2].getColorNumber() 
-							|| mat[i][j].getColorNumber() == mat[i + 1][j + 2].getColorNumber()) {
+				
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i][j + 2].getColorNumber() 
+							|| mat[i][j].getColorNumber() == mat[i + 1][j + 2].getColorNumber())) {
 						return true;
-					}
 				}
 				
 			}
@@ -58,48 +57,44 @@ public class NextMoveChecker {
 		//scorro partendo da N,0		
 		for (int i = Utility.DIM1 - 1; i > 0; i--) {
 			for (int j = 0; j < Utility.DIM2 - 2; j++) {
-				if (mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 1][j + 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 1][j + 2].getColorNumber())) {
 						return true;
-					}
+					
 				}
-				if (mat[i][j].getColorNumber() == mat[i - 1][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i][j + 2].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i - 1][j + 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i][j + 2].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i - 1][j + 2].getColorNumber())) {
 						return true;
-					}
+					
 				}
 			}
 		}
 		//scorro partendo da 0,M
 		for (int i = 0; i < Utility.DIM1 - 1; i++) {
 			for (int j = Utility.DIM2 - 1; j > 1; j--) {
-				if (mat[i][j].getColorNumber() == mat[i][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 1][j - 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 1][j - 2].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i + 1][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i][j - 2].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i + 1][j - 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i][j - 2].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i + 1][j - 2].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}
 		//scorro partendo da N,M
 		for (int i = Utility.DIM1 - 1; i > 0; i--) {
 			for (int j = Utility.DIM2 - 1; j > 1; j--) {
-				if (mat[i][j].getColorNumber() == mat[i][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 1][j - 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 1][j - 2].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i - 1][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i][j - 2].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i - 1][j - 2].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i][j - 2].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i - 1][j - 2].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}	
@@ -133,64 +128,56 @@ public class NextMoveChecker {
 		//scorro partendo da 0,0
 		for (int j = 0; j < Utility.DIM2 - 1; j++) {
 			for (int i = 0; i < Utility.DIM1 - 2; i++) {
-				if (mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 2][j + 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 2][j + 1].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i + 1][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 2][j].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i + 2][j + 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 2][j].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i + 2][j + 1].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}
 		//scorro partendo da 0,M
 		for (int j = Utility.DIM2 - 1; j > 0; j--) {
 			for (int i = 0; i < Utility.DIM1 - 2; i++) {
-				if (mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 2][j - 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 2][j - 1].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i + 1][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i + 2][j].getColorNumber() 
-						|| mat[i][j].getColorNumber() == mat[i + 2][j - 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i + 1][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i + 2][j].getColorNumber() 
+						|| mat[i][j].getColorNumber() == mat[i + 2][j - 1].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}
 		//scorro partendo da N,0
 		for (int j = 0; j < Utility.DIM2 - 1; j++) {
 			for (int i = Utility.DIM1 - 1; i > 1; i--) {
-				if (mat[i][j].getColorNumber() == mat[i - 1][j].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 2][j + 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 2][j + 1].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i - 1][j + 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 2][j].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i - 2][j + 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j + 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 2][j].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i - 2][j + 1].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}
 		//scorro partendo da N,M
 		for (int j = Utility.DIM2 - 1; j > 0; j--) {
 			for (int i = Utility.DIM1 - 1; i > 1; i--) {
-				if (mat[i][j].getColorNumber() == mat[i - 1][j].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 2][j - 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 2][j - 1].getColorNumber())) {
 						return true;
-					}
 				}
-				if (mat[i][j].getColorNumber() == mat[i - 1][j - 1].getColorNumber()) {
-					if (mat[i][j].getColorNumber() == mat[i - 2][j].getColorNumber()
-						|| mat[i][j].getColorNumber() == mat[i - 2][j - 1].getColorNumber()) {
+				if ((mat[i][j].getColorNumber() == mat[i - 1][j - 1].getColorNumber()) 
+					&& (mat[i][j].getColorNumber() == mat[i - 2][j].getColorNumber()
+						|| mat[i][j].getColorNumber() == mat[i - 2][j - 1].getColorNumber())) {
 						return true;
-					}
 				}
 			}
 		}

@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import view.utility.ViewUtility;
-
 
 /**
  * Classe che comunica all'utente che ha perso la partita e gli permette di giocare nuovamente o di abbandonare il gioco.
@@ -22,8 +20,7 @@ public class GameOver extends AbstractFinal {
 
 	private static final long serialVersionUID = -7876870538465198338L;
 
-	private final ImageIcon iconLose = new ImageIcon("res" + ViewUtility.SEP + "loser.jpg");
-	private final JLabel label = createLabel("  GAME OVER :(  ", this.iconLose, JLabel.CENTER, JLabel.BOTTOM);
+	private final JLabel label = createLabel("  GAME OVER :(  ", ViewUtility.ICON_LOSE, JLabel.CENTER, JLabel.BOTTOM);
 	
 	/**
 	 * Costruttore.
@@ -45,7 +42,7 @@ public class GameOver extends AbstractFinal {
 
 		this.getContentPane().add(panel);
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

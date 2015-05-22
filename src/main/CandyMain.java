@@ -8,7 +8,7 @@ import view.Menu;
  * @author Beatrice Ricci
  *
  */
-public class Main {
+public class CandyMain {
 	/**
 	 * Metodo che lancia il main dell'applicazione.
 	 * @param args a
