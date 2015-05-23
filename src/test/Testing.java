@@ -160,12 +160,12 @@ public class Testing {
 		
 		try {
 			for (int i = 0; i < 1000; i++) {
-				c.checkTrisVertical(mat);
-				c.checkTrisHorizontal(mat);
-				c.checkPokerVertical(mat);
-				c.checkWrapped(mat);
-				c.checkFiveVertical(mat);
-				c.checkFiveHorizontal(mat);
+				assertFalse(c.checkTrisVertical(mat));
+				assertFalse(c.checkTrisHorizontal(mat));
+				assertFalse(c.checkPokerVertical(mat));
+				assertFalse(c.checkWrapped(mat));
+				assertFalse(c.checkFiveVertical(mat));
+				assertFalse(c.checkFiveHorizontal(mat));
 			}
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("Out of RANGE!");
@@ -179,17 +179,10 @@ public class Testing {
 	public void testNextMove() {
 		generateMatrix();
 		
-		assertFalse(n.checkNextMove(mat));
-		
 		//test range
 		try {
 			for (int i = 0; i < 1000; i++) {
-				c.checkTrisVertical(mat);
-				c.checkTrisHorizontal(mat);
-				c.checkPokerVertical(mat);
-				c.checkWrapped(mat);
-				c.checkFiveVertical(mat);
-				c.checkFiveHorizontal(mat);
+				assertFalse(n.checkNextMove(mat));
 			}
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("Out of RANGE!");
