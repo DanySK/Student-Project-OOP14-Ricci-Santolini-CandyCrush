@@ -69,7 +69,7 @@ public class Controller implements IController {
 	public void makeMove(final int x1, final int y1, final int x2, final int y2) {
 		if (model.checkExchange(x1, y1, x2, y2)) {
 			model.doExchange(x1, y1, x2, y2);
-			drawUpadates();
+			drawUpdates();
 			view.update(this.model.getMoves(), this.model.getScore());
 			//attivata una caramella special 
 			if (model.isUsingSpecial(x1, y1, x2, y2)) {
@@ -83,7 +83,7 @@ public class Controller implements IController {
 						} catch (InterruptedException e) {
 							System.out.println(e);	
 						}
-						drawUpadates();
+						drawUpdates();
 						view.update(model.getMoves(), model.getScore());
 						finalControl();
 					}
@@ -101,13 +101,15 @@ public class Controller implements IController {
 								System.out.println(e);
 							}		
 							model.gameLoop();
-							drawUpadates();
+							drawUpdates();
 							view.update(model.getMoves(), model.getScore());			
 						}
 						finalControl();
 						while (!model.checkNextMove()) {
 							model.shuffle();
 							new Shuffle().goShuffle();
+							drawUpdates();
+							view.update(getModelMoves(), getModelScore());
 						}
 					}
 				});
@@ -121,7 +123,7 @@ public class Controller implements IController {
 							System.out.println(e);
 						}
 						model.doExchange(x1, y1, x2, y2);
-						drawUpadates();
+						drawUpdates();
 						view.update(model.getMoves(), model.getScore());
 					}
 				});
@@ -150,7 +152,7 @@ public class Controller implements IController {
 	 * Metodo che fornisce alla view i dati per disegnare la matrice aggiornata. 
 	 * La view a sua volta li passerà alla classe Update.
 	 */
-	private void drawUpadates() {
+	private void drawUpdates() {
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {
 				this.view.draw(this.model.getColor(i, j), this.model.getTypeEl(i, j), i, j);
