@@ -29,6 +29,10 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 	private static final int HEIGHT_DIMENSION = 5;
 	private static final int DIMENSION_FONT_18 = 18;
 	private static final String TYPE_FONT = "Arial";
+
+	private EasyLevel easy = new EasyLevel();
+	private MediumLevel medium = new MediumLevel();
+	private DifficultLevel difficult = new DifficultLevel();
 	
 	private final JButton rb1 = new JButton("EASY");
 	private final JButton rb2 = new JButton("MEDIUM");
@@ -65,19 +69,19 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 		//actions
 		this.rb1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				new EasyLevel().setLevel();
+				easy.setLevel();
 				closePage();
 			}
 		});
 		this.rb2.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				new MediumLevel().setLevel();
+				medium.setLevel();
 				closePage();
 			}
 		});
 		this.rb3.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
-				new DifficultLevel().setLevel();
+				difficult.setLevel();
 				closePage();
 			}
 		});
