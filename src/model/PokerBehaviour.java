@@ -17,7 +17,7 @@ public class PokerBehaviour extends AbstractLinearBehaviour {
 	* @param mat matrice degli elementi
 	*/
 	@Override
-	public void makeVertical(final Candy[][] mat) {
+	public void makeVertical(final ICandy[][] mat) {
 		
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 3; i++) {
@@ -45,7 +45,7 @@ public class PokerBehaviour extends AbstractLinearBehaviour {
 	 * @param mat matrice degli elementi
 	 */
 	@Override
-	public void makeHorizontal(final Candy[][] mat) {
+	public void makeHorizontal(final ICandy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 3; j++) {

@@ -21,7 +21,7 @@ public class NextMoveChecker {
 	 * @return true se è possibile realizzare almeno una combinazione in verticale e/o
 	 * orizzontale in una sola mossa
 	*/
-	public boolean checkNextMove(final Candy[][] mat) {
+	public boolean checkNextMove(final ICandy[][] mat) {
 		if (checkNextMoveHorizontal(mat) || checkNextMoveVertical(mat)) {
 			return true;
 		}		
@@ -36,7 +36,7 @@ public class NextMoveChecker {
 	 * @param mat matrice degli elementi
 	 * @return true se è possibile una mossa con un solo scambio
 	 */
-	private boolean checkNextMoveHorizontal(final Candy[][] mat) {
+	private boolean checkNextMoveHorizontal(final ICandy[][] mat) {
 		
 		//scorro partendo da 0,0
 		for (int i = 0; i < Utility.DIM1 - 1; i++) {
@@ -123,7 +123,7 @@ public class NextMoveChecker {
 	 * @param mat matrice degli elementi
 	 * @return true se è possibile una mossa con un solo scambio
 	 */
-	private boolean checkNextMoveVertical(final Candy[][] mat) {
+	private boolean checkNextMoveVertical(final ICandy[][] mat) {
 
 		//scorro partendo da 0,0
 		for (int j = 0; j < Utility.DIM2 - 1; j++) {

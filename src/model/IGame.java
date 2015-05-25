@@ -15,7 +15,7 @@ public interface IGame {
 	 * @param mat matrice degli elementi
 	 * @return il punteggio relativo all'ultima mossa eseguita dal loop
 	 */
-	int gameLoop(final Candy[][] mat);
+	int gameLoop(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica se esiste almeno una combinazione di tre elementi. In questo caso non è rilavante se la combinazione è verticale o 
@@ -24,7 +24,7 @@ public interface IGame {
 	 * @param mat matrice degli elementi
 	 * @return true se esiste almeno una combinazione di tre elementi
 	 */
-	boolean checkTris(final Candy[][] mat);
+	boolean checkTris(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la possibilità, con una mossa, di generare almeno un tris con l'attuale matrice di gioco,
@@ -33,7 +33,7 @@ public interface IGame {
 	 * @param mat matrice degli elementi
 	 * @return true se è possibile una nuova mossa
 	 */
-	boolean checkNextMove(final Candy[][] mat);
+	boolean checkNextMove(final ICandy[][] mat);
 
 	/**
 	 * Metodo che modella il comportamento da utilizzare quando si attiva una caramella SPECIAL.
@@ -43,6 +43,6 @@ public interface IGame {
 	 * @return il numero di caramelle dello stesso colore di quella passata come parametro,
 	 * per calcore i punti bonus da attribuire
 	 */
-	int doFive(final Candy[][] mat, final int c);
+	int doFive(final ICandy[][] mat, final int c);
 	
 }

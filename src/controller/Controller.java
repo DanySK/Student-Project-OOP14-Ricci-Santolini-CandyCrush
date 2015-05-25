@@ -107,7 +107,7 @@ public class Controller implements IController {
 						finalControl();
 						while (!model.checkNextMove()) {
 							model.shuffle();
-							new Shuffle().goShuffle();
+							new Shuffle();
 							drawUpdates();
 							view.update(getModelMoves(), getModelScore());
 						}

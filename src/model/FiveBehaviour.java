@@ -18,7 +18,7 @@ public class FiveBehaviour extends AbstractLinearBehaviour {
 	 * @param mat matrice degli elementi
 	 */
 	@Override
-	public void makeHorizontal(final Candy[][] mat) {
+	public void makeHorizontal(final ICandy[][] mat) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2 - 4; j++) {
@@ -52,7 +52,7 @@ public class FiveBehaviour extends AbstractLinearBehaviour {
 	 * @param mat matrice degli elementi
 	 */
 	@Override
-	public void makeVertical(final Candy[][] mat) {
+	public void makeVertical(final ICandy[][] mat) {
 
 		for (int j = 0; j < Utility.DIM2; j++) {
 			for (int i = 0; i < Utility.DIM1 - 4; i++) {
@@ -89,7 +89,7 @@ public class FiveBehaviour extends AbstractLinearBehaviour {
 	 * @param mat matrice degli elementi
 	 * @return il numero di caramelle che sono state eliminate
 	 */
-	public int doFive(final Candy[][] mat, final int color) {
+	public int doFive(final ICandy[][] mat, final int color) {
 		int n = 0;
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {

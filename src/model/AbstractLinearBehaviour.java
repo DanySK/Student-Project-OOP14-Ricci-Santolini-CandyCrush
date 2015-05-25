@@ -13,13 +13,13 @@ public abstract class AbstractLinearBehaviour extends AbstractBehaviourControlle
 	 * in verticale.
 	 * @param mat matrice degli elementi
 	 */
-	protected abstract void makeVertical(final Candy[][] mat);
+	protected abstract void makeVertical(final ICandy[][] mat);
 	
 	/**
 	 * Metodo astratto che gestisce il comportamento da applicare quando devono essere eliminate caramelle
 	 * in orizzontale.
 	 * @param mat matrice degli elementi
 	 */
-	protected abstract void makeHorizontal(final Candy[][] mat);
+	protected abstract void makeHorizontal(final ICandy[][] mat);
 	
 }

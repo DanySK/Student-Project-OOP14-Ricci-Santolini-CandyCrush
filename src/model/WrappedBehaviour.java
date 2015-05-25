@@ -19,7 +19,7 @@ public class WrappedBehaviour extends AbstractBehaviourController {
 	 * 
 	 * @param mat matrice degli elementi
 	 */
-	public void controlWrapped(final Candy[][] mat) {
+	public void controlWrapped(final ICandy[][] mat) {
 			
 			for (int i = 0; i < Utility.DIM1 - 2; i++) {
 				for (int j = 0; j < Utility.DIM2 - 2; j++) {
@@ -116,7 +116,7 @@ public class WrappedBehaviour extends AbstractBehaviourController {
 	 * @param type codice che identifica il tipo di combinazione da gestire
 	 * @param color codice del colore della caramella generata
 	 */
-	public void doWrapped(final Candy[][] mat, final int i, final int j, final int type, final int color) {
+	public void doWrapped(final ICandy[][] mat, final int i, final int j, final int type, final int color) {
 
 		mat[i][j].setType(Utility.WRAPPED);
 		mat[i][j].setColorNumber(color);

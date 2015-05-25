@@ -31,7 +31,7 @@ public class Game implements IGame {
 	}
 	
 	@Override
-	public int gameLoop(final Candy[][] mat) {
+	public int gameLoop(final ICandy[][] mat) {
 
 		if (checker.checkFiveVertical(mat)) {
 			fiveController.makeVertical(mat);
@@ -59,17 +59,17 @@ public class Game implements IGame {
 	}
 	
 	@Override
-	public boolean checkTris(final Candy[][] mat) {
+	public boolean checkTris(final ICandy[][] mat) {
 		return checker.checkTris(mat);
 	}
 	
 	@Override
-	public boolean checkNextMove(final Candy[][] mat) {
+	public boolean checkNextMove(final ICandy[][] mat) {
 		return checker.checkNextMove(mat);
 	}
 	
 	@Override
-	public int doFive(final Candy[][] mat, final int c) {
+	public int doFive(final ICandy[][] mat, final int c) {
 		return fiveController.doFive(mat, c);
 	}
 }

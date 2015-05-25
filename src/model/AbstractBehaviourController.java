@@ -17,7 +17,7 @@ public abstract class AbstractBehaviourController {
 	 * @param j indice di colonna
 	 * @param mat matrice degli elementi
 	 */
-	protected void switchOptions(final Candy[][] mat, final int inputType, final int i, final int j) {
+	protected void switchOptions(final ICandy[][] mat, final int inputType, final int i, final int j) {
 		switch(inputType) {	
 			case Utility.NORMAL:
 				//do nothing, una caramella normale non genera comportamenti speciali a parte la sua eliminazione
@@ -42,7 +42,7 @@ public abstract class AbstractBehaviourController {
 	 * @param x colonna su cui operare
 	 * @param mat matrice degli elementi
 	 */
-	private void coloumn(final Candy[][] mat, final int x) {
+	private void coloumn(final ICandy[][] mat, final int x) {
 		
 		for (int i = 0; i < Utility.DIM1; i++) {
 			mat[i][x].setColorNumber(ModelUtilities.generate());
@@ -56,7 +56,7 @@ public abstract class AbstractBehaviourController {
 	 * @param x riga su cui operare
 	 * @param mat matrice degli elementi
 	 */
-	private void row(final Candy[][] mat, final int x) {
+	private void row(final ICandy[][] mat, final int x) {
 		
 		for (int i = x; i > 0; i--) {
 			for (int j = Utility.DIM2 - 1; j > -1; j--) {	
@@ -82,7 +82,7 @@ public abstract class AbstractBehaviourController {
 	 * @param second indice di colonna
 	 * @param mat matrice degli elementi
 	 */
-	private void bomb(final Candy[][] mat, final int first, final int second) {
+	private void bomb(final ICandy[][] mat, final int first, final int second) {
 			
 		if (first > 0 && first < Utility.DIM1 - 1 && second > 0 && second < Utility.DIM2 - 1) {
 			for (int i = first - 1; i < first + 2; i++) {
@@ -102,7 +102,7 @@ public abstract class AbstractBehaviourController {
 	* 
 	* @param mat matrice degli elementi
 	*/
-	protected void descend(final Candy[][] mat) {
+	protected void descend(final ICandy[][] mat) {
 		
 		@SuppressWarnings("unused")
 		
@@ -147,7 +147,7 @@ public abstract class AbstractBehaviourController {
 	* 
 	* @param mat matrice degli elementi
 	*/
-	protected void resolve(final Candy[][] mat) {
+	protected void resolve(final ICandy[][] mat) {
 	
 		for (int i = 0; i < Utility.DIM1; i++) {
 			for (int j = 0; j < Utility.DIM2; j++) {

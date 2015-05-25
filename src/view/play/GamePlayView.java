@@ -28,7 +28,7 @@ public class GamePlayView extends AbstractMenu implements IGamePlay {
 	
 	private final Butt[][] matrix = new Butt[Utility.DIM1][Utility.DIM2];
 	private final Controller c = new Controller(this);
-	private final Update up = new Update(this);
+	private final IUpdate up = new Update(this);
 	
 	private int initialTarget;
 	private int initialMoves;

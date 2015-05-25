@@ -86,7 +86,7 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 			}
 		});
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

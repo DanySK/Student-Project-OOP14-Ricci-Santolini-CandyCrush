@@ -9,7 +9,7 @@ import controller.Utility;
  */
 public class Board implements IBoard {
 	
-	private final Candy[][] mat = new Candy[Utility.DIM1][Utility.DIM2];
+	private final ICandy[][] mat = new Candy[Utility.DIM1][Utility.DIM2];
 
 	private final IGame game;
 	

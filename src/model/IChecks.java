@@ -25,7 +25,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris
 	 */
-	boolean checkTris(final Candy[][] mat);
+	boolean checkTris(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di tris verticali.
@@ -33,7 +33,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris verticale
 	 */
-	boolean checkTrisVertical(final Candy[][] mat);
+	boolean checkTrisVertical(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di tris orizzontali.
@@ -41,7 +41,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno un tris orizzontale
 	 */
-	boolean checkTrisHorizontal(final Candy[][] mat);
+	boolean checkTrisHorizontal(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di una combinazione da quattro verticale o orizzontale.
@@ -49,7 +49,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione da quattro
 	 */
-	boolean checkPoker(final Candy[][] mat);
+	boolean checkPoker(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in verticale.
@@ -57,7 +57,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di quattro caramelle in verticale
 	 */
-	boolean checkPokerVertical(final Candy[][] mat);
+	boolean checkPokerVertical(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di quattro caramelle in orizzontale.
@@ -65,7 +65,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di quattro caramelle in orizzontale
 	 */
-	boolean checkPokerHorizontal(final Candy[][] mat);
+	boolean checkPokerHorizontal(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di una combinazione da cinque verticale o orizzontale.
@@ -73,7 +73,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione da cinque
 	 */
-	boolean checkFive(final Candy[][] mat);
+	boolean checkFive(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in verticale.
@@ -81,7 +81,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di cinque caramelle in verticale
 	 */
-	boolean checkFiveHorizontal(final Candy[][] mat);
+	boolean checkFiveHorizontal(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di cinque caramelle in orizzontale.
@@ -89,7 +89,7 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è presente almeno una combinazione di cinque caramelle in orizzontale
 	 */
-	boolean checkFiveVertical(final Candy[][] mat);
+	boolean checkFiveVertical(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la presenza di combinazioni di due tris con una caramella
@@ -99,7 +99,7 @@ public interface IChecks {
 	 * @return true se è presente almeno una combinazione di due tris con una
 	 * caramella in comune
 	 */
-	boolean checkWrapped(final Candy[][] mat);
+	boolean checkWrapped(final ICandy[][] mat);
 	
 	/**
 	 * Metodo che verifica la possibilità, con una mossa, di generare almeno un tris con l'attuale matrice di gioco,
@@ -107,5 +107,5 @@ public interface IChecks {
 	 * @param mat matrice degli elementi
 	 * @return true se è possibile una nuova mossa
 	 */
-	boolean checkNextMove(final Candy[][] mat);
+	boolean checkNextMove(final ICandy[][] mat);
 }
