@@ -26,13 +26,10 @@ public class GameOver extends AbstractFinal {
 	 * Costruttore.
 	 */
 	public GameOver() {
-		//title
 		this.setTitle("    GAME LOST :(    ");
 		
-		//dimension
 		this.setDimension();
 		
-		// principal panel
 		final JPanel panel = new JPanel(new BorderLayout());
 		
 		this.lookPanel(panel);

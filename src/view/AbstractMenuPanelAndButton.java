@@ -4,8 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 /**
  * Classe astratta per gestire l'aspetto dei JButtone dei JPanel. 
- * Dato che alcune classi del programma hanno necessità di gestire l'aspetto sia di JButton che di JPanel questa classe permette
- * di implementare in ogni classe che ne necessita, i metodi a seconda dell'aspetto desiderato.
+ * Dato che alcune classi del programma hanno necessità di gestire l'aspetto sia di JButton che di JPanel
+ * questa classe permette di implementare in ogni altra classe che ne necessita, i metodi a seconda dell'aspetto desiderato.
  * 
  * @author Beatrice Ricci
  *

@@ -5,10 +5,10 @@ import controller.Utility;
 /**
  * Classe che contiene i metodi necessari a eseguire i controlli sulla matrice
  * di gioco che garantiscano che sia sempre possibile realizzare almeno una combinazione 
- * in una sola mossa con il set di caramelle attuali, e evita quindi che la partita non .
- * possa più proseguire
+ * in una sola mossa con il set di caramelle attuali, e evita quindi che la partita non
+ * possa più proseguire.
  * 
- * @author nicola
+ * @author Nicola Santolini
  *
  */
 public class NextMoveChecker {

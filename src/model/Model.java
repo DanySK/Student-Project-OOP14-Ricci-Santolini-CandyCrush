@@ -1,13 +1,9 @@
 package model;
 
-
 import controller.Utility;
 
-//import controller.Utility;
-
 /**
- * Classe che contiene il core della parte di model dell'applicazione, in 
- * particolare la matrice di gioco degli elementi.
+ * Classe princpale del model, gestisce elementi fondamentali per la partita come mosse e punteggi.
  * 
  * @author Nicola Santolini
  *

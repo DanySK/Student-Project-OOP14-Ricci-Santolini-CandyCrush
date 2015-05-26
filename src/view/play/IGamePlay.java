@@ -10,7 +10,7 @@ import view.IMenu;
  */
 public interface IGamePlay extends IMenu {
 	/**
-	 * Metodo che permette alla schermata di gioco di aggiornarci grazie alla classe update.
+	 * Metodo che permette alla schermata di gioco di aggiornarci grazie alla classe Update.
 	 * @param moves numero mosse da aggiornare
 	 * @param score punteggio da aggiornare
 	 */

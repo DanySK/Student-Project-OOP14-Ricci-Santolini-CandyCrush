@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Interfaccia che contiene tutti i metodi comuni ai vari menù di gioco.
+ * Interfaccia che contiene tutti i metodi comuni ai vari menù/schermate di gioco.
  * 
  * @author Beatrice Ricci
  *

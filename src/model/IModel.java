@@ -75,7 +75,7 @@ public interface IModel {
 	void setTarget(final int num);
 	
 	/**
-	 * Metodo che verifica se due coordinate sono compatibile per uno scambio,
+	 * Metodo che verifica se due coordinate sono compatibili per uno scambio,
 	 * cioè sono adiacenti ma non poste in diagonale.
 	 * 
 	 * @param x1 indice di riga della prima coordinata
@@ -123,7 +123,7 @@ public interface IModel {
 	void gameLoop();
 	
 	/**
-	 * Metodo che esegue controlla se si sta facend una mossa che coinvolge una caramella SPECIAL, il cui behaviour
+	 * Metodo che controlla se si sta facendo una mossa che coinvolge una caramella SPECIAL, il cui behaviour
 	 * deve essere in ogni caso attivato, indipendentemente dal fatto che la mossa generi una combinazione o meno.
 	 * 
 	 * @param x1 indice di riga della prima coordinata

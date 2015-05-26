@@ -2,6 +2,7 @@ package model;
 
 /**
  * Interfaccia di "facciata", che espone un numero ridotto di funzionalità per semplificare l'utilizzo da parte del client.
+ * Si tratta principalemente di funzonalità richieste dal Board.
  * 
  * @author Nicola Santolini
  */
@@ -18,8 +19,8 @@ public interface IGame {
 	int gameLoop(final ICandy[][] mat);
 	
 	/**
-	 * Metodo che verifica se esiste almeno una combinazione di tre elementi. In questo caso non è rilavante se la combinazione è verticale o 
-	 * orizzontale e di quanti elementi è comosta.
+	 * Metodo che verifica se esiste almeno una combinazione di tre elementi. In questo caso non è rilavante se la 
+	 * combinazione è verticale o orizzontale e di quanti elementi è composta.
 	 * 
 	 * @param mat matrice degli elementi
 	 * @return true se esiste almeno una combinazione di tre elementi

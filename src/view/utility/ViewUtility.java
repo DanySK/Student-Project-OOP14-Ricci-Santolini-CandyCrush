@@ -58,7 +58,5 @@ public final class ViewUtility {
 	 */
 	public static final ImageIcon ICON_WIN = new ImageIcon(ViewUtility.class.getResource("/image/win.jpg"));
 	
-	
-	
 	private ViewUtility() { }
 }

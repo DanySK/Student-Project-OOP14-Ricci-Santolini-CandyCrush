@@ -24,13 +24,10 @@ public class Win extends AbstractFinal {
 	 * Costruttore.
 	 */
 	public Win() {
-		//title
 		this.setTitle("    WIN !!    ");
 		
-		//dimension
 		this.setDimension();
 		
-		// principal panel
 		final JPanel panel = new JPanel(new BorderLayout());
 		this.lookPanel(panel);
 		panel.add(label, BorderLayout.CENTER);

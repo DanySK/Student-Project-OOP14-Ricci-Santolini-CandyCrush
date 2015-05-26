@@ -16,8 +16,8 @@ import view.level.ChoiceLevelMenu;
 import view.Question;
 
 /**
- * Classe astratta che contiene l'implementazione dei metodi che si occupano della creazione dei frame che gestiscono i messaggi
- * per la terminazione del gioco (vittoria, sconfitta).
+ * Classe astratta che contiene l'implementazione dei metodi che si occupano della creazione dei frame 
+ * che gestiscono i messaggi per la terminazione del gioco (vittoria, sconfitta).
  * 
  * @author Beatrice Ricci
  */

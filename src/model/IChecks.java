@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Interfaccia per la gestione dei controlli delle combinazioni nella matrice di gioco.
+ * Interfaccia per la gestione dei controlli sulle combinazioni nella matrice di gioco.
  * 
  * @author Nicola Santolini
  *

@@ -2,6 +2,7 @@ package view.level;
 
 /**
  * Interfaccia dei livelli di difficoltà.
+ * 
  * @author Beatrice Ricci
  *
  */

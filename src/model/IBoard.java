@@ -19,8 +19,8 @@ public interface IBoard {
 	void doExchange(final int x1, final int y1, final int x2, final int y2);
 	
 	/**
-	 * Getter del colore di un elemento della matrice di gioco.
-	 * date le sue coordinate
+	 * Getter del colore di un elemento della matrice di gioco
+	 * date le sue coordinate.
 	 * 
 	 * @param i indice di riga
 	 * @param j indice di colonna
@@ -56,8 +56,8 @@ public interface IBoard {
 	void setType(final int x, final int y, final int t);
 	
 	/**
-	 * Metodo che verifica se esiste almeno una combinazione di tre elementi. In questo caso non è rilavante se la combinazione è verticale o 
-	 * orizzontale e di quanti elementi è comosta.
+	 * Metodo che verifica se esiste almeno una combinazione di tre elementi. In questo caso non è rilavante se la 
+	 * combinazione è verticale o orizzontale e di quanti elementi è comosta.
 	 * 
 	 * @return true se esiste almeno una combinazione di tre elementi
 	 */

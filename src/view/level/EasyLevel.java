@@ -6,6 +6,7 @@ import view.play.IGamePlay;
 
 /**
  * Classe che va a impostare la schermata di gioco in base alla caratteristiche del livello più semplice.
+ * 
  * @author Beatrice Ricci
  *
  */

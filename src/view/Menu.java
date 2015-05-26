@@ -14,7 +14,7 @@ import view.utility.ViewUtility;
 
 /**
  * Classe che contiene il menù iniziale.
- * E' possibile scegliere di iniziare subito a giocare, di leggere le istruzioni di gioco o di chiudere l'applicazione
+ * E' possibile scegliere di iniziare subito a giocare, di leggere le istruzioni di gioco o di chiudere l'applicazione.
  * 
  * @author Beatrice Ricci
  *
@@ -34,10 +34,8 @@ public class Menu extends AbstractMenuButton {
 	 * Costruttore.
 	 */
 	public Menu() {
-		//title
 		this.setTitle("W E L C O M E");
 		
-		//dimension
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		final int dimension = (int) size.getWidth() / WIDTH_DIMENSION;
@@ -56,7 +54,6 @@ public class Menu extends AbstractMenuButton {
 		this.exit.setIcon(ViewUtility.IC_EXIT);
 		this.lookButton(this.exit);
 		
-		//add ActionListener to Buttons
 		this.start.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				new ChoiceLevelMenu();

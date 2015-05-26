@@ -3,8 +3,7 @@ package model;
 import controller.Utility;
 /**
  * 
- * Classe che modella a livello di modello un singolo elemento della 
- * matrice di gioco, caratterizzato da un colore e da un tipo.
+ * Classe che modella una caramella del campo di gioco, caratterizzata da un colore e da un tipo.
  * 
  * @author Nicola Santolini
  *

@@ -42,22 +42,18 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 	 * Costruttore del menù di scelta della difficoltà di gioco.
 	 */
 	public ChoiceLevelMenu() {
-		//title
 		this.setTitle("Choose level");
 		
-		//dimension
 		Dimension size;
 		size = Toolkit.getDefaultToolkit().getScreenSize();
 		final int dimension = (int) size.getWidth() / WIDTH_DIMENSION;
 		this.setSize(dimension, dimension / HEIGHT_DIMENSION);
 		this.setResizable(false);
 		
-		//principal panel
 		final JPanel panel = new MyPanel(ViewUtility.POIS);
 		panel.setLayout(new FlowLayout());
 		this.add(panel);
 		
-		//Button look
 		this.lookButton(rb1);
 		this.lookButton(rb2);
 		this.lookButton(rb3);
@@ -66,7 +62,6 @@ public class ChoiceLevelMenu extends AbstractMenuButton {
 		panel.add(rb2);
 		panel.add(rb3);
 		
-		//actions
 		this.rb1.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				easy.setLevel();

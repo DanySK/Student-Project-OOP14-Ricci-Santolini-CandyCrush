@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
- * Classe astratta che contiene metodi che caratterizzano tutte le GUI del Package. 
+ * Classe astratta che contiene metodi che caratterizzano le GUI del Package. 
  * 
  * @author Beatrice Ricci
  */

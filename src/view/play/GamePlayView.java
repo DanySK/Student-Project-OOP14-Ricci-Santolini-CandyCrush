@@ -12,8 +12,8 @@ import controller.Controller;
 import controller.Utility;
 
 /**
- * Classe che disegna la schermata principale del gioco con la matrice di caramelle, label con i punti, le mosse e l'obiettivo
- * che devono aggiornarsi ad ogni mossa.
+ * Classe che disegna la schermata principale del gioco con la matrice di caramelle, label con i punti, 
+ * le mosse e l'obiettivo che devono aggiornarsi ad ogni mossa.
  * 
  * @author Beatrice Ricci
  */
@@ -39,6 +39,7 @@ public class GamePlayView extends AbstractMenu implements IGamePlay {
 	private final JLabel level = new JLabel(" ");
 	
 	private final JPanel panel = new JPanel();
+	
 	/**
 	 * Costruttore della classe contenente la schermata principale di gioco.
 	 * @param iMoves mosse del livello
